@@ -1,5 +1,6 @@
 package StudentManage;
-
+import entity.Person.*;
+import entity.factory.*;
 import java.util.*;
 
 public class StudentManage{
@@ -44,8 +45,9 @@ public class StudentManage{
 	}
 
 	private void addStudent(){
+	    factory fac=new factory();
 		//调用工厂函数(参数1 生成学生), 生成学生对象, 再存储到数据库
-		Student stu =
+		Student stu =fac.addPerson(1);
 		if(stu.store())
 			System.out.println("添加学生信息成功!");
 		else

@@ -5,6 +5,11 @@ import java.util.Scanner;
 
 public class Student extends Person {
     private int stuNo;
+    public Student(){}
+    public Student(int stuNo)
+    {
+        this.stuNo=stuNo;
+    }
     public int getStuNo() {
         return stuNo;
     }
