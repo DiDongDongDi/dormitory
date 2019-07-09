@@ -49,7 +49,10 @@ public class StudentManage{
 		//成功返回0
 		//失败返回1
 		//stuID重复返回2
+		//注意显示增加的学生的信息
 		Student stu =
+		System.out.println("添加的学生信息为:");
+		stu.show();
 		if(stu.store()==0)
 			System.out.println("添加学生信息成功!");
 		else if(stu.store()==1)
@@ -134,6 +137,8 @@ public class StudentManage{
 		if(res == 3 || res == 4)
 			return res;
 		stu.change();
+		System.out.println("更改后的学生信息为:");
+		stu.show();
 		System.out.println("是否保存上述更改?(y/n)");
 		Scanner sc = new Scanner(System.in);
 		String choose = sc.next();
