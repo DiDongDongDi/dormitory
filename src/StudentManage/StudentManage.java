@@ -1,12 +1,10 @@
 package StudentManage;
 
+import DataBase.Database;
+
 import java.util.*;
 
 public class StudentManage{
-
-	public StudentManage(){
-		
-	}
 	
 	public void start(){
 		while(true){
@@ -15,7 +13,7 @@ public class StudentManage{
 			System.out.println("2. 删除学生信息");
 			System.out.println("3. 更改学生信息");
 			System.out.println("4. 查找学生信息");
-			System.out.println("0. 退出学生管理");
+			System.out.println("0. 退出学生系统");
 
 			Scanner sc = new Scanner(System.in);
 			int op = sc.nextInt();
@@ -33,7 +31,6 @@ public class StudentManage{
 					searchStudent();
 					break;
 				case 0:
-					System.out.println("成功退出学生管理!");
 					return;
 				default:
 					System.out.println("您的输入有误, 请重新输入!");
@@ -45,8 +42,8 @@ public class StudentManage{
 
 	private void addStudent(){
 		//调用工厂函数(参数1 生成学生), 生成学生对象, 再存储到数据库
-		Student stu =
-		if(stu.store())
+		Student stu =null;//TODO 这里需要修改
+		if(Database.DataBase_AddStudent(stu)/*stu.store()*/) //TODO:郝文韬在此做了修改
 			System.out.println("添加学生信息成功!");
 		else
 			System.out.println("添加学生信息失败!");
@@ -57,8 +54,7 @@ public class StudentManage{
 		Scanner sc = new Scanner(System.in);
 		int stuID = sc.nextInt();
 		if(stuID < 0){
-			System.out.println("您的输入有误!");
-			return;
+			System.out.println("您的输入有误, 请重新输入!");
 		}
 		int res = deleteStudentFromDB(stuID);
 		if(res == 0){
@@ -82,7 +78,7 @@ public class StudentManage{
 		//取消操作返回2
 		//未找到学生信息返回3
 		//需要进行二次确认(y/n), 同时显示该学生信息
-		
+		return Database.Database_DeleteStudent(stuID);
 	}
 
 	private void changeStudent(){
@@ -90,8 +86,7 @@ public class StudentManage{
 		Scanner sc = new Scanner(System.in);
 		int stuID = sc.nextInt();
 		if(stuID < 0){
-			System.out.println("您的输入有误!");
-			return;
+			System.out.println("您的输入有误, 请重新输入!");
 		}
 		int res = deleteStudentFromDB(stuID);
 		if(res == 0){
@@ -124,16 +119,16 @@ public class StudentManage{
 		//加载失败返回4
 		//期间要显示该学生信息
 		Student stu = new Student(stuID);
-		int res = stu.load();
+		int res = Database.Database_loadStudent(stu);//TODO:郝文韬在此做了修改
 		if(res == 3 || res == 4)
 			return res;
-		stu.change();
+		stu.change();//TODO:郝文韬没改这个地方,但他觉得这里有问题
 		System.out.println("是否保存上述更改?(y/n)");
 		Scanner sc = new Scanner(System.in);
 		String choose = sc.next();
 		while(true){
 			if(choose.equals("y")){
-			if(stu.store())
+			if(Database.DataBase_UpdateStudent(stu))//TODO:郝文韬在此做了修改
 				return 0;
 			else
 				return 1;
@@ -152,8 +147,7 @@ public class StudentManage{
 		Scanner sc = new Scanner(System.in);
 		int stuID = sc.nextInt();
 		if(stuID < 0){
-			System.out.println("您的输入有误!");
-			return;
+			System.out.println("您的输入有误, 请重新输入!");
 		}
 		int res = searchStudentFromDB(stuID);
 		if(res == 1){
@@ -164,10 +158,10 @@ public class StudentManage{
 		}
 	}
 
-	private int searchStudentFromDB(int stuID){
+	private int searchStudentFromDB(int stuID){//TODO:由于查找成功也会返回,所以郝文韬设置了  查找成功返回0
 		//查找失败返回1
 		//未找到返回3
 		//直接从数据库查找显示即可
-		
+		return Database.Database_SearchStudentByNumberAndPrintToScreen(stuID);
 	}
 }
