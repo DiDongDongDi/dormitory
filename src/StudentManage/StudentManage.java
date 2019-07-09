@@ -15,7 +15,7 @@ public class StudentManage{
 			System.out.println("2. 删除学生信息");
 			System.out.println("3. 更改学生信息");
 			System.out.println("4. 查找学生信息");
-			System.out.println("0. 退出学生管理");
+			System.out.println("0. 退出");
 
 			Scanner sc = new Scanner(System.in);
 			int op = sc.nextInt();
@@ -45,11 +45,17 @@ public class StudentManage{
 
 	private void addStudent(){
 		//调用工厂函数(参数1 生成学生), 生成学生对象, 再存储到数据库
+		//store函数
+		//成功返回0
+		//失败返回1
+		//stuID重复返回2
 		Student stu =
-		if(stu.store())
+		if(stu.store()==0)
 			System.out.println("添加学生信息成功!");
-		else
+		else if(stu.store()==1)
 			System.out.println("添加学生信息失败!");
+		else if(stu.store()==2)
+			System.out.println("学号重复, 添加学生信息失败!");
 	}
 
 	private void deleteStudent(){
@@ -93,7 +99,7 @@ public class StudentManage{
 			System.out.println("您的输入有误!");
 			return;
 		}
-		int res = deleteStudentFromDB(stuID);
+		int res = changeStudentFromDB(stuID);
 		if(res == 0){
 			System.out.println("更改成功!");
 		}
@@ -133,7 +139,7 @@ public class StudentManage{
 		String choose = sc.next();
 		while(true){
 			if(choose.equals("y")){
-			if(stu.store())
+			if(stu.update())//注意这里是update函数
 				return 0;
 			else
 				return 1;
