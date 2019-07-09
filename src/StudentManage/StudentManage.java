@@ -45,7 +45,7 @@ public class StudentManage{
 
 	private void addStudent(){
 		//调用工厂函数(参数1 生成学生), 生成学生对象, 再存储到数据库
-		Student stu = 
+		Student stu =
 		if(stu.store())
 			System.out.println("添加学生信息成功!");
 		else
