@@ -3,6 +3,10 @@ package StudentManage;
 import java.util.*;
 
 public class StudentManage{
+
+	public StudentManage(){
+		
+	}
 	
 	public void start(){
 		while(true){
@@ -11,7 +15,7 @@ public class StudentManage{
 			System.out.println("2. 删除学生信息");
 			System.out.println("3. 更改学生信息");
 			System.out.println("4. 查找学生信息");
-			System.out.println("0. 退出学生系统");
+			System.out.println("0. 退出学生管理");
 
 			Scanner sc = new Scanner(System.in);
 			int op = sc.nextInt();
@@ -29,6 +33,7 @@ public class StudentManage{
 					searchStudent();
 					break;
 				case 0:
+					System.out.println("成功退出学生管理!");
 					return;
 				default:
 					System.out.println("您的输入有误, 请重新输入!");
@@ -52,7 +57,8 @@ public class StudentManage{
 		Scanner sc = new Scanner(System.in);
 		int stuID = sc.nextInt();
 		if(stuID < 0){
-			System.out.println("您的输入有误, 请重新输入!");
+			System.out.println("您的输入有误!");
+			return;
 		}
 		int res = deleteStudentFromDB(stuID);
 		if(res == 0){
@@ -84,7 +90,8 @@ public class StudentManage{
 		Scanner sc = new Scanner(System.in);
 		int stuID = sc.nextInt();
 		if(stuID < 0){
-			System.out.println("您的输入有误, 请重新输入!");
+			System.out.println("您的输入有误!");
+			return;
 		}
 		int res = deleteStudentFromDB(stuID);
 		if(res == 0){
@@ -145,7 +152,8 @@ public class StudentManage{
 		Scanner sc = new Scanner(System.in);
 		int stuID = sc.nextInt();
 		if(stuID < 0){
-			System.out.println("您的输入有误, 请重新输入!");
+			System.out.println("您的输入有误!");
+			return;
 		}
 		int res = searchStudentFromDB(stuID);
 		if(res == 1){
