@@ -1,7 +1,10 @@
 package StudentManage;
 import entity.Person.*;
 import entity.factory.*;
+
 import java.util.*;
+import DataBase.*;
+
 
 public class StudentManage{
 	public static factory fac=new factory();
@@ -48,7 +51,7 @@ public class StudentManage{
 	    factory fac=new factory();
 		//调用工厂函数(参数1 生成学生), 生成学生对象, 再存储到数据库
 		Student stu =fac.addPerson(1);
-		if(stu.store())
+		if(1==stu.store())
 			System.out.println("添加学生信息成功!");
 		else
 			System.out.println("添加学生信息失败!");
@@ -129,13 +132,13 @@ public class StudentManage{
 		int res = stu.load();
 		if(res == 3 || res == 4)
 			return res;
-		stu.change();
+		stu.change();//TODO 这个方法hwt,没写,但是有个update,是把现在的stu里面的东西写到数据库里面
 		System.out.println("是否保存上述更改?(y/n)");
 		Scanner sc = new Scanner(System.in);
 		String choose = sc.next();
 		while(true){
 			if(choose.equals("y")){
-			if(stu.store())
+			if(0==stu.store())
 				return 0;
 			else
 				return 1;
@@ -170,6 +173,7 @@ public class StudentManage{
 		//查找失败返回1
 		//未找到返回3
 		//直接从数据库查找显示即可
-		
+		Student temp=new Student();
+		return temp.display(stuID);
 	}
 }
