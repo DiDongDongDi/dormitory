@@ -1,9 +1,13 @@
 package Manage.StudentManage;
 
+import entity.Person.*;
+import entity.factory.*;
 import java.util.*;
+import DataBase.*;
+
 
 public class StudentManage{
-
+	public static factory fac=new factory();
 	public StudentManage(){
 		
 	}
@@ -15,7 +19,7 @@ public class StudentManage{
 			System.out.println("2. 删除学生信息");
 			System.out.println("3. 更改学生信息");
 			System.out.println("4. 查找学生信息");
-			System.out.println("0. 退出");
+			System.out.println("0. 退出学生管理");
 
 			Scanner sc = new Scanner(System.in);
 			int op = sc.nextInt();
@@ -39,8 +43,6 @@ public class StudentManage{
 					System.out.println("您的输入有误, 请重新输入!");
 			}
 		}
-		
-		
 	}
 
 	private void addStudent(){
@@ -50,7 +52,8 @@ public class StudentManage{
 		//失败返回1
 		//stuID重复返回2
 		//注意显示增加的学生的信息
-		Student stu = createStudent(1);
+	    factory fac=new factory();
+		Student stu =fac.addPerson(1);
 		System.out.println("添加的学生信息为:");
 		stu.show();//非数据库操作函数
 		int res = stu.store();

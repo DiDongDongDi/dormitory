@@ -11,9 +11,12 @@ public abstract class Person {
     public void setName(String name) {
         this.name = name;
     }
-    public boolean getSex()
+    public String getSex()
     {
-        return sex;
+        if(sex==true)
+            return "男";
+        else
+            return "女";
     }
 
     public String getName() {
