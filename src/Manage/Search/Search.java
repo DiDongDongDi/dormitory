@@ -1,4 +1,4 @@
-package Search;
+package Manage.Search;
 
 import java.util.*;
 
@@ -18,10 +18,10 @@ public class Search{
 			int op = sc.nextInt();
 			switch(op){
 				case 1:
-					searchFromStu();
+					searchByStu();
 					break;
 				case 2:
-					searchFromDormitory();
+					searchByDormitory();
 					break;
 				case 0:
 					System.out.println("成功退出查找!");
@@ -32,7 +32,7 @@ public class Search{
 		}
 	}
 
-	private void searchFromStu(){
+	private void searchByStu(){
 		System.out.println("请输入需要查找的学号:");
 		Scanner sc = new Scanner(System.in);
 		int stuID = sc.nextInt();
@@ -43,10 +43,11 @@ public class Search{
 		//下面直接根据学号在数据库中查找并显示出来
 		//显示 学号 楼号 楼层号 房间号 床号
 		//没有找到的话, 需要提示
-		
+		System.out.println("该学号对应的住宿信息为:");
+		StudentAndRoom.displayInDB(stuID);
 	}
 
-	private void searchFromDormitory(){
+	private void searchByDormitory(){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("请输入楼号:");
 		int building = sc.nextInt();
@@ -57,6 +58,7 @@ public class Search{
 		//根据以上这三个参数
 		//显示 楼号 楼层号 房间号 床号 学号
 		//没有找到的话, 需要提示
-		
+		System.out.println("该宿舍的学生信息为:");
+		StudentAndRoom.displayInDB(building, floor, room);
 	}
 }

@@ -1,4 +1,4 @@
-package StudentManage;
+package Manage.StudentManage;
 
 import java.util.*;
 
@@ -50,14 +50,15 @@ public class StudentManage{
 		//失败返回1
 		//stuID重复返回2
 		//注意显示增加的学生的信息
-		Student stu =
+		Student stu = createStudent(1);
 		System.out.println("添加的学生信息为:");
-		stu.show();
-		if(stu.store()==0)
+		stu.show();//非数据库操作函数
+		int res = stu.store();
+		if(res==0)
 			System.out.println("添加学生信息成功!");
-		else if(stu.store()==1)
+		else if(res==1)
 			System.out.println("添加学生信息失败!");
-		else if(stu.store()==2)
+		else if(res==2)
 			System.out.println("学号重复, 添加学生信息失败!");
 	}
 
@@ -69,7 +70,7 @@ public class StudentManage{
 			System.out.println("您的输入有误!");
 			return;
 		}
-		int res = deleteStudentFromDB(stuID);
+		int res = deleteStudentInDB(stuID);
 		if(res == 0){
 			System.out.println("删除成功!");
 		}
@@ -84,14 +85,37 @@ public class StudentManage{
 		}
 	}
 
-	private int deleteStudentFromDB(int stuID){
+	private int deleteStudentInDB(int stuID){
 		//从数据库中找到对应的学生信息删除
 		//删除成功返回0
 		//删除失败返回1
 		//取消操作返回2
 		//未找到学生信息返回3
 		//需要进行二次确认(y/n), 同时显示该学生信息
-		
+		Student stu = new Student();
+		if(stu.search(stuID)==0){
+			System.out.println("您要删除的学生信息为:");
+			stu.display(stuID);
+			System.out.println("确认删除吗?(y/n)");
+			Scanner sc = new Scanner(System.in);
+			String choose = sc.next();
+			while(true){
+				if(choose.equals("y")){
+					if(stu.delete(stuID)==0)
+						return 0;
+					else
+						return 1;
+				}
+				else if(choose.equals("n")){
+					return 2;
+				}
+				else{
+					System.out.println("您的输入有误, 请重新输入!");
+				}
+			}
+		}
+		else
+			return 3;
 	}
 
 	private void changeStudent(){
@@ -102,7 +126,7 @@ public class StudentManage{
 			System.out.println("您的输入有误!");
 			return;
 		}
-		int res = changeStudentFromDB(stuID);
+		int res = changeStudentInDB(stuID);
 		if(res == 0){
 			System.out.println("更改成功!");
 		}
@@ -120,7 +144,7 @@ public class StudentManage{
 		}
 	}
 
-	private int changeStudentFromDB(int stuID){
+	private int changeStudentInDB(int stuID){
 		//以stuID为参数new一个学生对象, 不是工厂出来的
 		//将该学生信息从数据库中加载出来, 调用学生对象的加载函数
 		//调用学生对象的更改函数, 完成对应的更改
@@ -134,20 +158,22 @@ public class StudentManage{
 		//期间要显示该学生信息
 		Student stu = new Student(stuID);
 		int res = stu.load();
-		if(res == 3 || res == 4)
-			return res;
-		stu.change();
+		if(res == 2)
+			return 3;
+		if(res == 1)
+			return 4;
+		stu.change();//非数据库的操作
 		System.out.println("更改后的学生信息为:");
-		stu.show();
+		stu.show();//非数据库的操作
 		System.out.println("是否保存上述更改?(y/n)");
 		Scanner sc = new Scanner(System.in);
 		String choose = sc.next();
 		while(true){
 			if(choose.equals("y")){
-			if(stu.update())//注意这里是update函数
-				return 0;
-			else
-				return 1;
+				if(stu.update()==0)//注意这里是update函数
+					return 0;
+				else
+					return 1;
 			}
 			else if(choose.equals("n")){
 				return 2;
@@ -166,7 +192,7 @@ public class StudentManage{
 			System.out.println("您的输入有误!");
 			return;
 		}
-		int res = searchStudentFromDB(stuID);
+		int res = searchStudentInDB(stuID);
 		if(res == 1){
 			System.out.println("查找失败!");
 		}
@@ -175,10 +201,21 @@ public class StudentManage{
 		}
 	}
 
-	private int searchStudentFromDB(int stuID){
+	private int searchStudentInDB(int stuID){
+		//查找成功返回0
 		//查找失败返回1
 		//未找到返回3
 		//直接从数据库查找显示即可
-		
+		Student stu = new Student();
+		int res = stu.search(stuID);
+		if(res==0){
+			System.out.println("该学生的信息如下:");
+			stu.display(stuID);
+			return 0;
+		}
+		else if(res==1)
+			return 1;
+		else if(res==2)
+			return 3;
 	}
 }

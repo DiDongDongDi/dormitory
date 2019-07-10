@@ -1,15 +1,16 @@
 import java.util.*;
-import StudentManage.*;
-import Search.*;
+import Manage.*;
 
 public class DormitoryManage{
 
 	StudentManage SM;
 	Search search;
+	ExchangeDormitoryManage EDM;
 
 	DormitoryManage(){
 		SM = new StudentManage();
 		search = new Search();
+		EDM = new ExchangeDormitoryManage();
 	}
 	
 	public void start(){//进入宿舍管理系统
@@ -31,9 +32,8 @@ public class DormitoryManage{
 				case 2:
 
 					break;
-
 				case 3:
-
+					EDM.start();
 					break;
 				case 4:
 					search.start();
