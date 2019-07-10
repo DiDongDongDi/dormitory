@@ -12,7 +12,7 @@ public class Search{
 			System.out.println("请选择查找方式:");
 			System.out.println("1. 根据学号查找");
 			System.out.println("2. 根据宿舍查找");
-			System.out.println("0. 退出查找");
+			System.out.println("0. 退出");
 
 			Scanner sc = new Scanner(System.in);
 			int op = sc.nextInt();

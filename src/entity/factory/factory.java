@@ -10,6 +10,8 @@ public class factory {
                     ProductStu ps=new ProductStu();
                     return ps.produce();
                 case 2:
+                    productSuper pro=new productSuper();
+                    return pro.produce();
                 default:
                     System.out.println("输入错误");
                     return null;

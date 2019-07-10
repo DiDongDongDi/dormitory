@@ -4,7 +4,7 @@ import entity.factory.*;
 import java.util.*;
 
 public class StudentManage{
-
+	public static factory fac=new factory();
 	public StudentManage(){
 		
 	}
