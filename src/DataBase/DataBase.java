@@ -7,12 +7,12 @@ package DataBase;
 import java.sql.*;
 import java.util.*;
 import entity.Person.*;
-public class Database
+public class DataBase
 {
     static Statement statement;
     static Connection connection;
 
-     public Database()
+     public DataBase()
     {
         //connect();
 
