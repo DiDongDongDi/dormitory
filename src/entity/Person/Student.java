@@ -139,7 +139,7 @@ public class Student extends Person implements implement{
     public int load(){// 给出仅有学号的学生,从数据库获得另外两个信息,(自己写的类传参默认为引用)
         int num=getStuNo();
         if(!Student_IfNumberExists(num)){//号码不存在!
-            return 1;
+            return 2;
         }
         else{
             try{
