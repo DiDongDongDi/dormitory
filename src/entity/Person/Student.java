@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 import DataBase.*;
-import Manage.ExchangeDormitoryManage.*;
 import implement.implement;
 import java.util.Scanner;
 
@@ -55,7 +54,7 @@ public class Student extends Person implements implement{
         try{
             PreparedStatement pstmt = null;
             String sql="select * from student where number=?";//查找的sql
-            pstmt=Database.getConnection().prepareStatement(sql);
+            pstmt=DataBase.getConnection().prepareStatement(sql);
             pstmt.setString(1,String.valueOf(num));
 
             return pstmt.execute(sql);//是否找到学生?(boolean)
@@ -72,7 +71,7 @@ public class Student extends Person implements implement{
         {
             PreparedStatement pstmt = null;
             String sql="INSERT INTO student VALUES('?','?','?')";
-            pstmt= Database.getConnection().prepareStatement(sql);
+            pstmt= DataBase.getConnection().prepareStatement(sql);
             pstmt.setString(1,String.valueOf(this.getStuNo()));
             pstmt.setString(2,this.getName());
             pstmt.setString(3,this.getSex());
@@ -106,7 +105,7 @@ public class Student extends Person implements implement{
         try{
             PreparedStatement pstmt = null;
             String sql="select * from student where number=?";//查找的sql
-            pstmt = Database.getConnection().prepareStatement(sql);
+            pstmt = DataBase.getConnection().prepareStatement(sql);
             pstmt.setString(1,String.valueOf(stuID));
 
             if(!pstmt.execute(sql)){//是否找到学生?(boolean)
@@ -115,7 +114,7 @@ public class Student extends Person implements implement{
             else{
                 try{
                     sql="select * from student where number=?";//查找的sql
-                    pstmt=Database.getConnection().prepareStatement(sql);
+                    pstmt=DataBase.getConnection().prepareStatement(sql);
                     pstmt.setString(1,String.valueOf(stuID));
                     ResultSet rs=pstmt.executeQuery(sql);//查找学生,放入ResultSet内
                     while(rs.next()){//打印学生信息
@@ -144,7 +143,7 @@ public class Student extends Person implements implement{
         else{
             try{
                 String sql="select * from student where number=?";//查找的sql
-                PreparedStatement pstmt=Database.getConnection().prepareStatement(sql);
+                PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setString(1,String.valueOf(num));
                 ResultSet rs=pstmt.executeQuery(sql);//查找学生,放入ResultSet内
                 rs.next();
@@ -168,7 +167,7 @@ public class Student extends Person implements implement{
                 display(num);
 
                 String sql="delete from student where number=?";//删除的sql
-                PreparedStatement pstmt=Database.getConnection().prepareStatement(sql);
+                PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setString(1,String.valueOf(num));
                 if(1==pstmt.executeUpdate()){//删除一个,返回0
                     return 0;
@@ -194,7 +193,7 @@ public class Student extends Person implements implement{
         else{
             try{
                 String sql="update student set name=?,sex=? where number=?";//查找的sql
-                PreparedStatement pstmt=Database.getConnection().prepareStatement(sql);
+                PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setString(1,getName());
                 pstmt.setString(2,getSex());
                 pstmt.setString(3,String.valueOf(getStuNo()));
