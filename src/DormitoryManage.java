@@ -1,5 +1,7 @@
 import java.util.*;
-import Manage.*;
+import Manage.StudentManage.*;
+import Manage.Search.*;
+import Manage.ExchangeDormitoryManage.*;
 
 public class DormitoryManage{
 

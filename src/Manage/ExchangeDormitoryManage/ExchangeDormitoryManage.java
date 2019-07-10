@@ -1,6 +1,7 @@
 package Manage.ExchangeDormitoryManage;
 
 import java.util.*;
+import entity.Person.*;
 
 public class ExchangeDormitoryManage{
 	public ExchangeDormitoryManage(){
@@ -92,8 +93,15 @@ public class ExchangeDormitoryManage{
 			return;
 		}
 		Student stu = new Student(stuID);
-		if()
-		stu.load();
+		int res = stu.load();
+		if(res==1){
+			System.out.println("加载学生信息失败!");
+			return;
+		}
+		else if(res==2){
+			System.out.println("未找到该学号对应的学生信息!");
+			return;
+		}
 		System.out.println("请输入目标宿舍楼号:");
 		int building = sc.nextInt();
 		System.out.println("请输入目标宿舍楼层号:");
@@ -188,6 +196,7 @@ public class ExchangeDormitoryManage{
 			System.out.println("您要删除的住宿信息为:");
 			StudentAndRoom.displayInDB(stuID);
 			System.out.println("确认删除吗?(y/n)");
+			Scanner sc = new Scanner(System.in);
 			String choose = sc.next();
 			while(true){
 				if(choose.equals("y")){

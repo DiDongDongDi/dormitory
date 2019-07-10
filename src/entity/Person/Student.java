@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 import DataBase.*;
-import StudentManage.StudentManage;
+import Manage.ExchangeDormitoryManage.*;
 import implement.implement;
 import java.util.Scanner;
 

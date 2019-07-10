@@ -53,7 +53,7 @@ public class StudentManage{
 		//stuID重复返回2
 		//注意显示增加的学生的信息
 	    factory fac=new factory();
-		Student stu =fac.addPerson(1);
+		Student stu = (Student)(fac.addPerson(1));
 		System.out.println("添加的学生信息为:");
 		stu.show();//非数据库操作函数
 		int res = stu.store();
@@ -218,7 +218,7 @@ public class StudentManage{
 		}
 		else if(res==1)
 			return 1;
-		else if(res==2)
+		else
 			return 3;
 	}
 }
