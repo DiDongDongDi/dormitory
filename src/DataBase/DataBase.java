@@ -37,8 +37,8 @@ public class DataBase
             statement=connection.createStatement();
             System.out.println("连接数据库成功");
         }catch(Exception e){
-            e.printStackTrace();
-            System.out.println("连接失败");
+            //e.printStackTrace();
+            System.out.println("连接失败,(DB41)");
         }
     }
     public static void DataBase_Disconnect(){
@@ -52,7 +52,8 @@ public class DataBase
             connection.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("断开连接失败");
         }
         System.out.println("数据库断开连接");
     }
