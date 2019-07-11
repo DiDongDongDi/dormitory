@@ -59,15 +59,16 @@ public class Student extends Person implements implement{
     private static boolean Student_IfNumberExists(int num){ //给定学号判断是否存在于数据库,静态,仅供操作数据库的方法内部使用
         try{
             PreparedStatement pstmt = null;
-            String sql="select * from student where number=?";//查找的sql
+            String sql="select * from student where stuId=?";//查找的sql
             pstmt=DataBase.getConnection().prepareStatement(sql);
             pstmt.setInt(1,num);
+            ResultSet rs=pstmt.executeQuery();
 
-            return pstmt.execute(sql);//是否找到学生?(boolean)
+            return rs.next();//是否找到学生?(boolean)
 
         }catch (SQLException e) {
-            System.out.println("查找number存在过程出现异常");//此处最后可以注释掉
-            e.printStackTrace();                 //此处最后可以注释掉
+            System.out.println("查找学号是否存在过程出现异常");//此处最后可以注释掉
+            //e.printStackTrace();                 //此处最后可以注释掉
             return false;
         }
     }
@@ -84,16 +85,18 @@ public class Student extends Person implements implement{
             pstmt.setInt(1,this.getStuNo());
             pstmt.setString(2,this.getName());
             pstmt.setString(3,this.getSex());
+
+
             pstmt.executeUpdate();
 
             //DataBase.getConnection().commit();//手动提交
             //DataBase.getConnection().setAutoCommit(true);//打开自动提交
 
         } catch (SQLException e) {
-            //System.out.println("学号不能重复!");
+            System.out.println("学号不能重复!");
 
             success=2;
-            e.printStackTrace();
+            //e.printStackTrace();
 
             /*try {
                 DataBase.getConnection().rollback();//出错就回滚
@@ -127,33 +130,33 @@ public class Student extends Person implements implement{
 
         try{
             PreparedStatement pstmt = null;
-            String sql="select * from student where number=?";//查找的sql
+            String sql="select * from student where stuId=?";//查找的sql
             pstmt = DataBase.getConnection().prepareStatement(sql);
             pstmt.setInt(1,stuID);
 
-            if(!pstmt.execute(sql)){//是否找到学生?(boolean)
+            if(!pstmt.execute()){//是否找到学生?(boolean)
                 return 3;
             }
             else{
                 try{
-                    sql="select * from student where number=?";//查找的sql
+                    sql="select * from student where stuId=?";//查找的sql
                     pstmt=DataBase.getConnection().prepareStatement(sql);
                     pstmt.setInt(1,stuID);
-                    ResultSet rs=pstmt.executeQuery(sql);//查找学生,放入ResultSet内
+                    ResultSet rs=pstmt.executeQuery();//查找学生,放入ResultSet内
                     while(rs.next()){//打印学生信息
                         System.out.println(rs.getInt(1)+rs.getString(2)+rs.getString(3));
                     }
                     return 0;//正常打印了学生信息
                 }catch (SQLException e) {//删除过程中出现异常
-                    System.out.println("查找学生时出现异常");//此处最后可以注释掉
-                    e.printStackTrace();                 //此处最后可以注释掉
+                    System.out.println("尝试显示学生信息:查找学生时出现异常");//此处最后可以注释掉
+                    //e.printStackTrace();                 //此处最后可以注释掉
                     return 1;
                 }
             }
 
         }catch (SQLException e) {
-            System.out.println("查找number存在过程出现异常");//此处最后可以注释掉
-            e.printStackTrace();                 //此处最后可以注释掉
+            System.out.println("尝试显示学生信息:查找学生时出现异常_2");//此处最后可以注释掉
+            //e.printStackTrace();                 //此处最后可以注释掉
             return 1;
         }
 
@@ -165,13 +168,13 @@ public class Student extends Person implements implement{
         }
         else{
             try{
-                String sql="select * from student where number=?";//查找的sql
+                String sql="select * from student where stuId=?";//查找的sql
                 PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setInt(1,num);
-                ResultSet rs=pstmt.executeQuery(sql);//查找学生,放入ResultSet内
+                ResultSet rs=pstmt.executeQuery();//查找学生,放入ResultSet内
                 rs.next();
                 setName(rs.getString(2));
-                setSex(rs.getBoolean(3));//TODO:数据类型有错误 by郝文韬
+                setSex(rs.getString(3).equals("男"));//TODO:数据类型有错误 by郝文韬
 
 
                 return 0;//修改成功
@@ -189,7 +192,7 @@ public class Student extends Person implements implement{
 
                 display(num);
 
-                String sql="delete from student where number=?";//删除的sql
+                String sql="delete from student where stuId=?";//删除的sql
                 PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setInt(1,num);
                 if(1==pstmt.executeUpdate()){//删除一个,返回0
@@ -215,7 +218,7 @@ public class Student extends Person implements implement{
         }
         else{
             try{
-                String sql="update student set name=?,sex=? where number=?";//查找的sql
+                String sql="update student set name=?,gender=? where stuId=?";//查找的sql
                 PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setString(1,getName());
                 pstmt.setString(2,getSex());
