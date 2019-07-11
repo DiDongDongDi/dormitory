@@ -46,7 +46,29 @@ public class Block {
     public int getSuperId() {
         return superId;
     }
-
+    public void WritePostFile(String str)
+    {
+        String filename="res/Post"+buildId+".txt";
+        try{
+            postFile=new File(filename);
+            if(!postFile.exists())
+                postFile.createNewFile();
+            FileWriter fr=new FileWriter(filename,true);
+            BufferedWriter bw=new BufferedWriter(fr);
+            bw.write(str+"\r\n");
+            bw.flush();
+            bw.close();
+            fr.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println("写入失败！");
+        }
+        catch (Exception e)
+        {
+            System.out.println("未知错误！");
+        }
+    }
     public void WriteProblemFile(String str)
     {
         String filename="res/Problem"+buildId+".txt";
@@ -70,6 +92,23 @@ public class Block {
             System.out.println("未知错误！");
         }
     }
+    public void loadPostFile()
+    {
+        System.out.println(getBuildId()+"号大楼公告板如下");
+        try{
+            FileReader fr=new FileReader(postFile);
+            BufferedReader br=new BufferedReader(fr);
+            String str;
+            while((str=br.readLine())!=null)
+                System.out.println(str);
+            br.close();
+        }
+
+        catch (Exception e)
+        {
+            System.out.println("未知错误！");
+        }
+    }
     public void loadProblemFile()
     {
         System.out.println(getBuildId()+"号大楼问题板如下");
@@ -79,7 +118,9 @@ public class Block {
         String str;
         while((str=br.readLine())!=null)
             System.out.println(str);
+            br.close();
         }
+
         catch (Exception e)
         {
             System.out.println("未知错误！");
