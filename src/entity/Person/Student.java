@@ -63,6 +63,7 @@ public class Student extends Person implements implement{
             pstmt=DataBase.getConnection().prepareStatement(sql);
             pstmt.setInt(1,num);
             ResultSet rs=pstmt.executeQuery();
+
             return rs.next();//是否找到学生?(boolean)
 
         }catch (SQLException e) {
@@ -173,7 +174,7 @@ public class Student extends Person implements implement{
                 ResultSet rs=pstmt.executeQuery();//查找学生,放入ResultSet内
                 rs.next();
                 setName(rs.getString(2));
-                setSex(rs.getBoolean(3));//TODO:数据类型有错误 by郝文韬
+                setSex(rs.getString(3).equals("男"));//TODO:数据类型有错误 by郝文韬
 
 
                 return 0;//修改成功
@@ -217,7 +218,7 @@ public class Student extends Person implements implement{
         }
         else{
             try{
-                String sql="update student set name=?,sex=? where stuId=?";//查找的sql
+                String sql="update student set name=?,gender=? where stuId=?";//查找的sql
                 PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setString(1,getName());
                 pstmt.setString(2,getSex());
