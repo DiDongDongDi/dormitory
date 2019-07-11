@@ -8,7 +8,7 @@ public class room {
     {contain=4;}
     room(int fI,int rI)
     {
-        contain=4;
+        contain=4;//一个宿舍最多住四个人，住进去一个--，出来一个++
         this.floorId=fI;
         this.roomId=rI;
     }
