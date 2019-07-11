@@ -32,7 +32,7 @@ public class DormitoryManage{
 					SM.start();
 					break;
 				case 2:
-
+					
 					break;
 				case 3:
 					EDM.start();

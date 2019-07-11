@@ -1,5 +1,4 @@
 package entity.Person;
-import com.sun.org.apache.bcel.internal.generic.GOTO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
