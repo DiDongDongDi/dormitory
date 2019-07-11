@@ -27,22 +27,29 @@ public class Student extends Person implements implement{
         Scanner in=new Scanner(System.in);
         int no;
         int sex;
+        boolean flg=true;
         System.out.println("欢迎办理入住手续！");
         System.out.print("请输入您的姓名：");
         String names=in.next();
         setName(names);
-        tt:System.out.print("请输入您的性别 1.男性 2.女性");
+        while(flg){
+        System.out.print("请输入您的性别 1.男性 2.女性");
         switch (in.nextInt())
         {
             case 1:
                 setSex(true);
+                flg=false;
                 break;
             case 2:
                 setSex(false);
+                flg=false;
                 break;
+
             default:
                 System.out.println("输入错误");
-                GOTO tt;
+                flg=true;
+               break;
+        }
         }
         System.out.print("请输入您的学号：");
         no=in.nextInt();
@@ -229,5 +236,11 @@ public class Student extends Person implements implement{
             }
         }
         //return 0;
+    }
+    public void show()
+    {
+        System.out.println("学生信息如下");
+        System.out.println("姓名\t\t学号\t\t性别");
+        System.out.println(getName()+"\t\t"+getStuNo()+"\t\t"+getSex());
     }
 }
