@@ -40,7 +40,7 @@ public class Block implements implement{
         this.maxRoom = maxRoom;
     }
 
-    private ArrayList rommList=new ArrayList<room>();
+    private ArrayList roomList=new ArrayList<room>();
 
     public int getBuildId() {
         return buildId;
@@ -53,7 +53,13 @@ public class Block implements implement{
     public void setSuperId(int superId) {
         this.superId = superId;
     }
-
+    public String getSex()
+    {
+        if(gender==true)
+            return "男";
+        else
+            return "女";
+    }
     public int getSuperId() {
         return superId;
     }
@@ -153,11 +159,12 @@ public class Block implements implement{
         for(int i=1;i<=getMaxFloor();i++)
         {
             for(int j=1;j<=getMaxRoom();j++)
-                rommList.add(new room(i,j));
+                roomList.add(new room(i,j));
         }
         System.out.println("请输入管理员id");
         setSuperId(in.nextInt());
     }
+
     private static boolean IfBuildingExists(int OneBuildingId){
         //传入一个方法检测宿舍楼号在不在数据库中,静态,仅供本类方法内部使用
         try {
@@ -392,5 +399,12 @@ public class Block implements implement{
             e.printStackTrace();                 //此处最后可以注释掉
             return 1;
         }
+    }
+    public void show()
+    {
+        System.out.println(buildId+"号宿舍楼信息如下：");
+        System.out.println("性别\t\t楼层数\t\t总房间数\t\t管理员id");
+        System.out.println(getSex()+"\t\t"+maxFloor+"\t\t"+maxFloor*maxRoom+"\t\t"+superId);
+
     }
 }
