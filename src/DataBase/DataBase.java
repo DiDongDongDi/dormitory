@@ -29,7 +29,7 @@ public class DataBase
                  System.out.println("数据库驱动加载成功");//可以注释掉
              }catch(ClassNotFoundException e){}
              //连接数据库
-             connection=DriverManager.getConnection("jdbc:mysql://wangqy.top:3306/university","didong","wangqytop");//域名应该已经能直接用了
+             connection=DriverManager.getConnection("jdbc:mysql://wangqy.top:3306/university?verifyServerCertificate=false&useSSL=false","didong","wangqytop");//域名应该已经能直接用了
              statement=connection.createStatement();
          }catch(Exception e){
              e.printStackTrace();

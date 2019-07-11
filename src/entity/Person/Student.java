@@ -80,7 +80,7 @@ public class Student extends Person implements implement{
 
             //DataBase.getConnection().setAutoCommit(false);//关闭自动提交
 
-            String sql="INSERT INTO student VALUES('?','?','?')";
+            String sql="INSERT INTO student VALUES(?,?,?)";
             pstmt= DataBase.getConnection().prepareStatement(sql);
             pstmt.setInt(1,this.getStuNo());
             pstmt.setString(2,this.getName());
