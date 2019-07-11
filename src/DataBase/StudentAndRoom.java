@@ -1,8 +1,6 @@
 package DataBase;
 
 import java.sql.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 import entity.Person.*;
 public class StudentAndRoom {
@@ -11,7 +9,7 @@ public class StudentAndRoom {
             PreparedStatement pstmt = null;
             String sql="select * from student_and_room where stuId=?";//查找的sql
             pstmt = DataBase.getConnection().prepareStatement(sql);
-            pstmt.setString(1,String.valueOf(StuID));
+            pstmt.setInt(1,StuID);
             ResultSet rs =pstmt.executeQuery();
             System.out.println("ID\t\t\tBuildId\t\t\tFloorId\t\t\tRoomId\t\t\tBedId");
             if(!rs.wasNull()){
@@ -27,7 +25,7 @@ public class StudentAndRoom {
             }
             else
                 System.out.println("      "); //输出空格表示没有查到
-           DataBase.DataBase_Disconnect();
+            DataBase.DataBase_Disconnect();
         }catch (SQLException e)
         {
             e.printStackTrace();
@@ -41,9 +39,9 @@ public class StudentAndRoom {
             PreparedStatement pstmt = null;
             String sql ="select * from student_and_room where buildId = ? and floorId = ? and roomId =?";
             pstmt = DataBase.getConnection().prepareStatement(sql);
-            pstmt.setString(1,String.valueOf(buildId));
-            pstmt.setString(2,String.valueOf(FloorId));
-            pstmt.setString(3,String.valueOf(RoomId));
+            pstmt.setInt(1,buildId);
+            pstmt.setInt(2,FloorId);
+            pstmt.setInt(3,RoomId);
             ResultSet rs =pstmt.executeQuery();
             System.out.println("ID\t\t\tBedId");
             if(!rs.wasNull()) {
@@ -64,17 +62,17 @@ public class StudentAndRoom {
     }
 
 
-//根据宿舍信息（楼号，层号，宿舍号，床号）寻找宿舍学生ID
+    //根据宿舍信息（楼号，层号，宿舍号，床号）寻找宿舍学生ID
     public static void displayInDB(int buildId,int FloorId,int RoomId,int BedId)
     {
         try{
             PreparedStatement pstmt = null;
             String sql ="select * from student_and_room where buildId = ? and floorId = ? and roomId =? and bedid = ?";
             pstmt = DataBase.getConnection().prepareStatement(sql);
-            pstmt.setString(1,String.valueOf(buildId));
-            pstmt.setString(2,String.valueOf(FloorId));
-            pstmt.setString(3,String.valueOf(RoomId));
-            pstmt.setString(4,String.valueOf(BedId));
+            pstmt.setInt(1,buildId);
+            pstmt.setInt(2,FloorId);
+            pstmt.setInt(3,RoomId);
+            pstmt.setInt(4,BedId);
             ResultSet rs =pstmt.executeQuery();
             System.out.println("ID ");
             if(!rs.wasNull()) {
@@ -100,7 +98,7 @@ public class StudentAndRoom {
             PreparedStatement pstmt = null;
             String sql="select * from student_and_room where stuId=?";//查找的sql
             pstmt = DataBase.getConnection().prepareStatement(sql);
-            pstmt.setString(1,String.valueOf(stuId));
+            pstmt.setInt(1,stuId);
             ResultSet rs =pstmt.executeQuery();
             return (!rs.wasNull());
         }catch (SQLException e) {
@@ -111,10 +109,71 @@ public class StudentAndRoom {
 
 
     //给student根据性别和宿舍空闲情况分配宿舍，成功分配返回true
-    public static boolean allocted(Student student)
+    public static boolean allocated(Student student)
     {
         //TODO:
-        return true;
+        try {
+            int build = 0;
+            int room = 0;
+            int floor = 0;
+            int bed = 0;
+            if (student.getSex().equals("男")) {
+                String sql = "select * from boy_empty_rooms";
+                PreparedStatement psmst = DataBase.getConnection().prepareStatement(sql);
+                ResultSet rs = psmst.executeQuery();
+                if(rs.wasNull())
+                    return false;
+                else {
+                    while (rs.next())
+                    {
+                        build = rs.getInt("buildId");
+                        room = rs.getInt("roomId");
+                        floor = rs.getInt("floorId");
+                        bed = rs.getInt("bedId");
+                    }
+                    String sql2 = "update student_and_room set buildId = ? and floorId = ? and roomId = ? and bedId = ? where stuId = ?";
+                    psmst = DataBase.getConnection().prepareStatement(sql2);
+                    psmst.setInt(1,build);
+                    psmst.setInt(2,floor);
+                    psmst.setInt(3,room);
+                    psmst.setInt(4,bed);
+                    psmst.setInt(5,student.getStuNo());
+                    psmst.executeUpdate();
+                    return true;
+                }
+            }
+            else if(student.getSex().equals("女"))
+            {
+                String sql = "select * from girl_empty_rooms";
+                PreparedStatement psmst = DataBase.getConnection().prepareStatement(sql);
+                ResultSet rs = psmst.executeQuery();
+                if(rs.wasNull())
+                    return false;
+                else {
+                    while (rs.next())
+                    {
+                        build = rs.getInt("buildId");
+                        room = rs.getInt("roomId");
+                        floor = rs.getInt("floorId");
+                        bed = rs.getInt("bedId");
+                    }
+                    String sql2 = "update student_and_room set buildId = ? and floorId = ? and roomId = ? and bedId = ? where stuId = ?";
+                    psmst = DataBase.getConnection().prepareStatement(sql2);
+                    psmst.setInt(1,build);
+                    psmst.setInt(2,floor);
+                    psmst.setInt(3,room);
+                    psmst.setInt(4,bed);
+                    psmst.setInt(5,student.getStuNo());
+                    psmst.executeUpdate();
+                    return true;
+                }
+            }
+            else
+                return false;
+        }catch (SQLException e)
+        {
+            return false;
+        }
     }
 
 
@@ -125,10 +184,10 @@ public class StudentAndRoom {
             PreparedStatement pstmt = null;
             String sql ="select stuId  from student_and_room where buildId = ? and floorId = ? and roomId =? and bedId = ?";
             pstmt = DataBase.getConnection().prepareStatement(sql);
-            pstmt.setString(1,String.valueOf(buildId));
-            pstmt.setString(2,String.valueOf(FloorId));
-            pstmt.setString(3,String.valueOf(RoomId));
-            pstmt.setString(4,String.valueOf(BedId));
+            pstmt.setInt(1,buildId);
+            pstmt.setInt(2,FloorId);
+            pstmt.setInt(3,RoomId);
+            pstmt.setInt(4,BedId);
             ResultSet rs =pstmt.executeQuery();
             return (!rs.wasNull());
         }catch (SQLException e)
@@ -139,56 +198,56 @@ public class StudentAndRoom {
     }
 
 
-//判断学生是否可以调换换心仪的宿舍
+    //判断学生是否可以调换换心仪的宿舍
     public static boolean exchange(int stuID,int buildId,int FloorId,int RoomId,int BedId)
     {
         //TODO:
         try {
             if(isAllocated(stuID))
             {
-                String ID=" ";
-                String build = " ";
-                String room = " ";
-                String floor = " ";
-                String bed = " ";
+                int ID = 0;
+                int build = 0;
+                int room = 0;
+                int floor = 0;
+                int bed = 0;
                 PreparedStatement pstmt = null;
                 String sql = "select stuId from student_and_room where buildId=? and floorId=? and roomId=? and bedId=?";
                 pstmt = DataBase.getConnection().prepareStatement(sql);
-                pstmt.setString(1,String.valueOf(buildId));
-                pstmt.setString(2,String.valueOf(FloorId));
-                pstmt.setString(3,String.valueOf(RoomId));
-                pstmt.setString(4,String.valueOf(BedId));
+                pstmt.setInt(1,buildId);
+                pstmt.setInt(2,FloorId);
+                pstmt.setInt(3,RoomId);
+                pstmt.setInt(4,BedId);
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next())
                 {
-                     ID = rs.getString("stuId");
+                    ID = rs.getInt("stuId");
                 }
                 String sql2 = "select * from student_and_room where stuId =?";
                 pstmt = DataBase.getConnection().prepareStatement(sql2);
-                pstmt.setString(1,String.valueOf(stuID));
+                pstmt.setInt(1,stuID);
                 ResultSet rs1 = pstmt.executeQuery();
                 while(rs1.next())
                 {
-                     build = rs1.getString("buildId");
-                     room = rs1.getString("roomId");
-                     floor = rs1.getString("floorId");
-                     bed = rs1.getString("bedId");
+                    build = rs1.getInt("buildId");
+                    room = rs1.getInt("roomId");
+                    floor = rs1.getInt("floorId");
+                    bed = rs1.getInt("bedId");
                 }
                 String sql3 = "update student_and_room set stuId = ? where buildId = ? and floorId = ? and roomId = ? and bedId = ? ";
                 pstmt=DataBase.getConnection().prepareStatement(sql3);
-                pstmt.setString(1,String.valueOf(stuID));
-                pstmt.setString(2,String.valueOf(buildId));
-                pstmt.setString(3,String.valueOf(FloorId));
-                pstmt.setString(4,String.valueOf(RoomId));
-                pstmt.setString(5,String.valueOf(BedId));
+                pstmt.setInt(1,stuID);
+                pstmt.setInt(2,buildId);
+                pstmt.setInt(3,FloorId);
+                pstmt.setInt(4,RoomId);
+                pstmt.setInt(5,BedId);
                 pstmt.executeUpdate();
                 String sql4 = "update student_and_room set buildId = ? and floorId = ? and roomId = ? and bedId = ? where stuId = ?";
                 pstmt=DataBase.getConnection().prepareStatement(sql4);
-                pstmt.setString(1,build);
-                pstmt.setString(2,floor);
-                pstmt.setString(3,room);
-                pstmt.setString(4,bed);
-                pstmt.setString(5,ID);
+                pstmt.setInt(1,build);
+                pstmt.setInt(2,floor);
+                pstmt.setInt(3,room);
+                pstmt.setInt(4,bed);
+                pstmt.setInt(5,ID);
                 pstmt.executeUpdate();
                 return true;
             }
@@ -204,14 +263,14 @@ public class StudentAndRoom {
 
 
     //在数据库中删除学生信息,删除成功返回true
-    public static boolean delete(Student student)
+    public static boolean delete(int stuID)
     {
         try {
-            if(isAllocated(student.getStuNo()))
+            if(isAllocated(stuID))
             {
                 String sql ="delete from student_and_room where stuId = ? ";
                 PreparedStatement pstmt = DataBase.getConnection().prepareStatement(sql);
-                pstmt.setString(1,String.valueOf(student.getStuNo()));
+                pstmt.setInt(1,stuID);
                 pstmt.executeUpdate();
                 DataBase.DataBase_Disconnect();
                 return true;
