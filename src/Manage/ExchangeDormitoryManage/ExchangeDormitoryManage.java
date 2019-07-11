@@ -72,7 +72,7 @@ public class ExchangeDormitoryManage{
 			if(StudentAndRoom.isAllocated(stuID))
 				return 2;
 			else{
-				if(StudentAndRoom.allocate(stu)){
+				if(StudentAndRoom.allocated(stu)){
 					System.out.println("分配的宿舍信息如下:");
 					StudentAndRoom.displayInDB(stuID);
 					return 0;
@@ -138,7 +138,7 @@ public class ExchangeDormitoryManage{
 		int stuID = stu.getStuNo();
 		if(StudentAndRoom.isAllocated(stuID)){
 			if(StudentAndRoom.isExists(building, floor, room, bed)){
-				if(stu.getSex().equals()){//TODO 性别对比
+				if(stu.getSex().equals("男")){//TODO 性别对比
 					System.out.println("该学号床位信息为:");
 					StudentAndRoom.displayInDB(stuID);
 					System.out.println("目标床位信息为:");
