@@ -2,6 +2,7 @@ package Manage.ExchangeDormitoryManage;
 
 import java.util.*;
 import entity.Person.*;
+import DataBase.*;
 
 public class ExchangeDormitoryManage{
 	public ExchangeDormitoryManage(){
@@ -67,7 +68,7 @@ public class ExchangeDormitoryManage{
 		//该学号已经分配宿舍返回2
 		//已经没有空床位了返回3
 		Student stu = new Student(stuID);
-		if(stu.load()){
+		if(stu.load()==0){
 			if(StudentAndRoom.isAllocated(stuID))
 				return 2;
 			else{
@@ -111,7 +112,7 @@ public class ExchangeDormitoryManage{
 		System.out.println("请输入目标宿舍床位号:");
 		int bed = sc.nextInt();
 
-		int res = exchangeDromitoryInDB(stu, building, floor, room, bed);
+		res = exchangeDromitoryInDB(stu, building, floor, room, bed);
 		if(res==0)
 			System.out.println("成功交换宿舍!");
 		else if(res==1)
@@ -134,6 +135,7 @@ public class ExchangeDormitoryManage{
 		//取消操作返回4
 		//调换失败返回5
 		//区分目标床位是否已经有人
+		int stuID = stu.getStuNo();
 		if(StudentAndRoom.isAllocated(stuID)){
 			if(StudentAndRoom.isExists(building, floor, room, bed)){
 				if(stu.getGender().equals()){//TODO 性别对比
@@ -146,7 +148,7 @@ public class ExchangeDormitoryManage{
 					String choose = sc.next();
 					while(true){
 						if(choose.equals("y")){
-							if(StudentAndRoom.exchange(int stuID, int building, int floor, int room, int bed))//由于交换前已经确认性别是吻合的, 所以不需要传Student对象
+							if(StudentAndRoom.exchange(stuID, building, floor, room, bed))//由于交换前已经确认性别是吻合的, 所以不需要传Student对象
 								return 0;
 							else
 								return 5;

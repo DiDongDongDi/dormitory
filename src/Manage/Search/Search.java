@@ -1,6 +1,7 @@
 package Manage.Search;
 
 import java.util.*;
+import DataBase.*;
 
 public class Search{
 	public Search(){

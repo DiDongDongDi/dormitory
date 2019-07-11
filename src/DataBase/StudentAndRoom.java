@@ -35,7 +35,7 @@ public class StudentAndRoom {
     }
 
     //根据宿舍信息（楼号，层号，宿舍号）寻找宿舍学生ID和对应床号
-    public static void diplayInDB(int buildId,int FloorId,int RoomId)
+    public static void displayInDB(int buildId,int FloorId,int RoomId)
     {
         try{
             PreparedStatement pstmt = null;
@@ -65,7 +65,7 @@ public class StudentAndRoom {
 
 
 //根据宿舍信息（楼号，层号，宿舍号，床号）寻找宿舍学生ID
-    public static void diplayInDB(int buildId,int FloorId,int RoomId,int BedId)
+    public static void displayInDB(int buildId,int FloorId,int RoomId,int BedId)
     {
         try{
             PreparedStatement pstmt = null;
@@ -94,7 +94,7 @@ public class StudentAndRoom {
 
 
     //判断学生是否被分配宿舍,分配成功返回true
-    public static boolean isAlloctaed(int stuId)
+    public static boolean isAllocated(int stuId)
     {
         try {
             PreparedStatement pstmt = null;
@@ -144,7 +144,7 @@ public class StudentAndRoom {
     {
         //TODO:
         try {
-            if(isAlloctaed(stuID))
+            if(isAllocated(stuID))
             {
                 String ID=" ";
                 String build = " ";
@@ -207,7 +207,7 @@ public class StudentAndRoom {
     public static boolean delete(Student student)
     {
         try {
-            if(isAlloctaed(student.getStuNo()))
+            if(isAllocated(student.getStuNo()))
             {
                 String sql ="delete from student_and_room where stuId = ? ";
                 PreparedStatement pstmt = DataBase.getConnection().prepareStatement(sql);
