@@ -11,6 +11,7 @@ public class Block {
     private int maxFloor;
     private int maxRoom;
     private int superId;
+    private boolean gender;
     private File problemFile;
     private File postFile;
     public int getMaxFloor() {
@@ -126,9 +127,14 @@ public class Block {
             System.out.println("未知错误！");
         }
     }
-   public void create_building()//自动创建大楼
+   public void create_building()//自动创建大楼,但是要在factory里面盖楼
     {
         Scanner in=new Scanner(System.in);
+        System.out.println("这是男生宿舍还是女生宿舍 1.男生 2.女生");
+        if(in.nextInt()==1)
+            gender=true;
+        else
+            gender=false;
         setBuildId(getBuildId()+1);
         System.out.println("请输入这栋楼有多少楼层");
         setMaxFloor(in.nextInt());
@@ -139,6 +145,8 @@ public class Block {
             for(int j=1;j<=getMaxRoom();j++)
                 rommList.add(new room(i,j));
         }
+        System.out.println("请输入管理员id");
+        setSuperId(in.nextInt());
     }
 
 
