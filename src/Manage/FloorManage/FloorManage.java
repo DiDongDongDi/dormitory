@@ -54,8 +54,8 @@ public class FloorManage {
             int buildId = sc.nextInt();
             System.out.println("请输入你想操作的楼层号：");
             int floorId = sc.nextInt();
-          /*  Floor floor = new Floor();
-            floor.load(buildId,floorId);
+          /*  Floor floor = new Floor(buildId,floorId);
+            floor.load();
             floor.change();
             int res = floor.update();
             if(res==1)
