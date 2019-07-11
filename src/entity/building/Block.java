@@ -1,10 +1,32 @@
 package entity.building;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Block {
-    private int buildId;
+    private static int buildId;
+    private int maxFloor;
+    private int maxRoom;
+    private int superId;
+    private File problemFile;
+    private File postFile;
+    public int getMaxFloor() {
+        return maxFloor;
+    }
+
+    public void setMaxFloor(int maxFloor) {
+        this.maxFloor = maxFloor;
+    }
+
+    public int getMaxRoom() {
+        return maxRoom;
+    }
+
+    public void setMaxRoom(int maxRoom) {
+        this.maxRoom = maxRoom;
+    }
+
     private ArrayList rommList=new ArrayList<room>();
 
     public int getBuildId() {
@@ -15,7 +37,7 @@ public class Block {
         this.buildId = buildId;
     }
 
-    void create_building()
+   public void create_building()//自动创建大楼
     {
         Scanner in=new Scanner(System.in);
         int floorNum=0;
@@ -30,4 +52,5 @@ public class Block {
                 rommList.add(new room(i,j));
         }
     }
+
 }
