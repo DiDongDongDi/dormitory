@@ -84,13 +84,14 @@ public class Student extends Person implements implement{
             pstmt.setInt(1,this.getStuNo());
             pstmt.setString(2,this.getName());
             pstmt.setString(3,this.getSex());
+
             pstmt.executeUpdate();
 
             //DataBase.getConnection().commit();//手动提交
             //DataBase.getConnection().setAutoCommit(true);//打开自动提交
 
         } catch (SQLException e) {
-            //System.out.println("学号不能重复!");
+            System.out.println("学号不能重复!");
 
             success=2;
             e.printStackTrace();

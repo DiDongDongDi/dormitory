@@ -23,18 +23,23 @@ public class DataBase
     }
 
     public static void DataBase_Connect(){//连接数据库
-         try{
-             try{
-                 Class.forName( "com.mysql.jdbc.Driver");
-                 System.out.println("数据库驱动加载成功");//可以注释掉
-             }catch(ClassNotFoundException e){}
-             //连接数据库
-             connection=DriverManager.getConnection("jdbc:mysql://wangqy.top:3306/university?verifyServerCertificate=false&useSSL=false","didong","wangqytop");//域名应该已经能直接用了
-             statement=connection.createStatement();
-         }catch(Exception e){
-             e.printStackTrace();
-             System.out.println("连接失败");
-         }
+        try{
+            try{
+                Class.forName( "com.mysql.cj.jdbc.Driver");
+                System.out.println("数据库驱动加载成功");//可以注释掉
+            }catch(ClassNotFoundException e){}
+            //连接数据库
+            //String name="com.mysql.jdbc.Driver";///加载jdbc driver
+            // String url="jdbc:mysql://172.20.0.73/jilei";  //连接到172.20.0.73上的jilei的mysql数据库
+            //Class.forName(name);
+
+            connection=DriverManager.getConnection("jdbc:mysql://wangqy.top:3306/dormitory?verifyServerCertificate=false&useSSL=false","didong","wangqytop");//TODO:域名等信息不详
+            statement=connection.createStatement();
+            System.out.println("连接数据库成功");
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("连接失败");
+        }
     }
     public static void DataBase_Disconnect(){
         try {
@@ -49,6 +54,7 @@ public class DataBase
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        System.out.println("数据库断开连接");
     }
 
 }
