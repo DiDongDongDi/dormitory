@@ -62,8 +62,8 @@ public class Student extends Person implements implement{
             String sql="select * from student where stuId=?";//查找的sql
             pstmt=DataBase.getConnection().prepareStatement(sql);
             pstmt.setInt(1,num);
-
-            return pstmt.execute();//是否找到学生?(boolean)
+            ResultSet rs=pstmt.executeQuery();
+            return rs.next();//是否找到学生?(boolean)
 
         }catch (SQLException e) {
             System.out.println("查找学号是否存在过程出现异常");//此处最后可以注释掉
