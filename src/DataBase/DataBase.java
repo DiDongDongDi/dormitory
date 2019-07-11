@@ -29,9 +29,9 @@ public class DataBase
                 System.out.println("数据库驱动加载成功");//可以注释掉
             }catch(ClassNotFoundException e){}
             //连接数据库
-            String name="com.mysql.jdbc.Driver";///加载jdbc driver
+            //String name="com.mysql.jdbc.Driver";///加载jdbc driver
             // String url="jdbc:mysql://172.20.0.73/jilei";  //连接到172.20.0.73上的jilei的mysql数据库
-            Class.forName(name);
+            //Class.forName(name);
 
             connection=DriverManager.getConnection("jdbc:mysql://wangqy.top:3306/dormitory?verifyServerCertificate=false&useSSL=false","didong","wangqytop");//TODO:域名等信息不详
             statement=connection.createStatement();
