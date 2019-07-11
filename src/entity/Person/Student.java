@@ -27,7 +27,7 @@ public class Student extends Person implements implement{
         Scanner in=new Scanner(System.in);
         int no;
         int sex;
-        boolean flg;
+        boolean flg=true;
         System.out.println("欢迎办理入住手续！");
         System.out.print("请输入您的姓名：");
         String names=in.next();
@@ -219,5 +219,11 @@ public class Student extends Person implements implement{
             }
         }
         //return 0;
+    }
+    public void show()
+    {
+        System.out.println("学生信息如下");
+        System.out.println("姓名\t\t学号\t\t性别");
+        System.out.println(getName()+"\t\t"+getStuNo()+"\t\t"+getSex());
     }
 }
