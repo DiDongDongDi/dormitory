@@ -1,11 +1,13 @@
 package entity.building;
 
-import java.io.File;
+import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Block {
-    private static int buildId;
+    private static int buildId=1;
     private int maxFloor;
     private int maxRoom;
     private int superId;
@@ -37,20 +39,66 @@ public class Block {
         this.buildId = buildId;
     }
 
+    public void setSuperId(int superId) {
+        this.superId = superId;
+    }
+
+    public int getSuperId() {
+        return superId;
+    }
+
+    public void WriteProblemFile(String str)
+    {
+        String filename="res/Problem"+buildId+".txt";
+        try{
+        problemFile=new File(filename);
+        if(!problemFile.exists())
+            problemFile.createNewFile();
+            FileWriter fr=new FileWriter(filename,true);
+            BufferedWriter bw=new BufferedWriter(fr);
+            bw.write(str+"\r\n");
+            bw.flush();
+            bw.close();
+            fr.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println("写入失败！");
+        }
+        catch (Exception e)
+        {
+            System.out.println("未知错误！");
+        }
+    }
+    public void loadProblemFile()
+    {
+        System.out.println(getBuildId()+"号大楼问题板如下");
+        try{
+        FileReader fr=new FileReader(problemFile);
+        BufferedReader br=new BufferedReader(fr);
+        String str;
+        while((str=br.readLine())!=null)
+            System.out.println(str);
+        }
+        catch (Exception e)
+        {
+            System.out.println("未知错误！");
+        }
+    }
    public void create_building()//自动创建大楼
     {
         Scanner in=new Scanner(System.in);
-        int floorNum=0;
-        int roomNum=0;
+        setBuildId(getBuildId()+1);
         System.out.println("请输入这栋楼有多少楼层");
-        floorNum=in.nextInt();
+        setMaxFloor(in.nextInt());
         System.out.println("请输入一层有多少房间");
-        roomNum=in.nextInt();
-        for(int i=1;i<=floorNum;i++)
+        setMaxRoom(in.nextInt());
+        for(int i=1;i<=getMaxFloor();i++)
         {
-            for(int j=1;j<=roomNum;j++)
+            for(int j=1;j<=getMaxRoom();j++)
                 rommList.add(new room(i,j));
         }
     }
+
 
 }
