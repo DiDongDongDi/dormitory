@@ -503,8 +503,8 @@ public class Block implements implement{
                 pstmt.setInt(3,getBuildId());
             }
             else{
-                System.out.println("您输入的管理员ID不存在于数据库中,管理员将被置为空值");
-                sql = "update buildings set supId=null,gender=? where buildId= ?";//查找的sql
+                System.out.println("您输入的管理员ID不存在于数据库中,管理员将不被修改");
+                sql = "update buildings set gender=? where buildId= ?";//查找的sql
                 pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setString(1,getGender());
                 pstmt.setInt(2,getBuildId());
