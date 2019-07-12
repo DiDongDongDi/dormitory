@@ -25,7 +25,6 @@ public class StudentAndRoom {
             }
             else
                 System.out.println("      "); //输出空格表示没有查到
-            DataBase.DataBase_Disconnect();
         }catch (SQLException e)
         {
             e.printStackTrace();
@@ -54,7 +53,6 @@ public class StudentAndRoom {
             }
             else
                 System.out.println("      "); //输出空格表示没有查到
-            DataBase.DataBase_Disconnect();
         }catch (SQLException e)
         {
             e.printStackTrace();
@@ -83,7 +81,6 @@ public class StudentAndRoom {
             }
             else
                 System.out.println("      "); //输出空格表示没有查到
-            DataBase.DataBase_Disconnect();
         }catch (SQLException e)
         {
             e.printStackTrace();
@@ -272,7 +269,6 @@ public class StudentAndRoom {
                 PreparedStatement pstmt = DataBase.getConnection().prepareStatement(sql);
                 pstmt.setInt(1,stuID);
                 pstmt.executeUpdate();
-                DataBase.DataBase_Disconnect();
                 return true;
             }
             else
