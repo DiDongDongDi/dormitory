@@ -48,7 +48,7 @@ public class StudentAndRoom {
                 while (rs.next()) {
                     int stuId = rs.getInt("stuId");
                     int BedId = rs.getInt("bedId");
-                    System.out.println(stuId + "\t\t\t" + BedId);//输出信息
+                    System.out.println(stuId==0?"     ":stuId + "\t\t\t" + BedId);//输出信息
 
                 }
             }
