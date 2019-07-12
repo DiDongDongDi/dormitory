@@ -11,7 +11,8 @@ public class StudentAndRoom {
             pstmt.setInt(1,StuID);
             ResultSet rs =pstmt.executeQuery();
             System.out.println("ID\t\t\tBuildId\t\t\tFloorId\t\t\tRoomId\t\t\tBedId");
-            if(!rs.wasNull()){
+            if(rs.next()){
+                rs.previous();
                 while (rs.next())
                 {
                     int stuId = rs.getInt("stuId");
@@ -42,7 +43,8 @@ public class StudentAndRoom {
             pstmt.setInt(3,RoomId);
             ResultSet rs =pstmt.executeQuery();
             System.out.println("ID\t\t\tBedId");
-            if(!rs.wasNull()) {
+            if(rs.next()) {
+                rs.previous();
                 while (rs.next()) {
                     int stuId = rs.getInt("stuId");
                     int BedId = rs.getInt("bedId");
@@ -72,7 +74,8 @@ public class StudentAndRoom {
             pstmt.setInt(4,BedId);
             ResultSet rs =pstmt.executeQuery();
             System.out.println("ID ");
-            if(!rs.wasNull()) {
+            if(rs.next()) {
+                rs.previous();
                 while (rs.next()) {
                     int stuId = rs.getInt("stuId");
                     System.out.println(stuId );//输出信息
@@ -96,7 +99,7 @@ public class StudentAndRoom {
             pstmt = DataBase.getConnection().prepareStatement(sql);
             pstmt.setInt(1,stuId);
             ResultSet rs =pstmt.executeQuery();
-            return (!rs.wasNull());
+            return (rs.next());
         }catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -117,9 +120,10 @@ public class StudentAndRoom {
                 String sql = "select * from boy_empty_rooms";
                 PreparedStatement psmst = DataBase.getConnection().prepareStatement(sql);
                 ResultSet rs = psmst.executeQuery();
-                if(rs.wasNull())
+                if(!rs.next())
                     return false;
                 else {
+                    rs.previous();
                     while (rs.next())
                     {
                         build = rs.getInt("buildId");
@@ -143,9 +147,10 @@ public class StudentAndRoom {
                 String sql = "select * from girl_empty_rooms";
                 PreparedStatement psmst = DataBase.getConnection().prepareStatement(sql);
                 ResultSet rs = psmst.executeQuery();
-                if(rs.wasNull())
+                if(!rs.next())
                     return false;
                 else {
+                    rs.previous();
                     while (rs.next())
                     {
                         build = rs.getInt("buildId");
@@ -185,7 +190,7 @@ public class StudentAndRoom {
             pstmt.setInt(3,RoomId);
             pstmt.setInt(4,BedId);
             ResultSet rs =pstmt.executeQuery();
-            return (!rs.wasNull());
+            return (rs.next());
         }catch (SQLException e)
         {
             e.printStackTrace();
