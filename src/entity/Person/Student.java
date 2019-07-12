@@ -25,12 +25,12 @@ public class Student extends Person implements implement{
         Scanner in=new Scanner(System.in);
         int no;
         boolean flg=true;
-        System.out.println("欢迎办理入住手续！");
-        System.out.print("请输入您的姓名：");
+        // System.out.println("欢迎办理入住手续！");
+        System.out.println("请输入学生姓名:");
         String names=in.next();
         setName(names);
         while(flg){
-        System.out.print("请输入您的性别 1.男性 2.女性");
+        System.out.println("请选择学生性别:\n1. 男\n2. 女");
         switch (in.nextInt())
         {
             case 1:
@@ -43,15 +43,15 @@ public class Student extends Person implements implement{
                 break;
 
             default:
-                System.out.println("输入错误");
+                System.out.println("您的输入有误!");
                 flg=true;
                break;
         }
         }
-        System.out.print("请输入您的学号：");
+        System.out.println("请输入学生学号:");
         no=in.nextInt();
         setStuNo(no);
-        System.out.println("登记成功，正在查找房间");
+        // System.out.println("登记成功，正在查找房间");
     }
 
     private static boolean Student_IfNumberExists(int num){ //给定学号判断是否存在于数据库,静态,仅供操作数据库的方法内部使用
@@ -91,7 +91,7 @@ public class Student extends Person implements implement{
             //DataBase.getConnection().setAutoCommit(true);//打开自动提交
 
         } catch (SQLException e) {
-            System.out.println("学号不能重复!");
+            // System.out.println("学号不能重复!");
 
             success=2;
             //e.printStackTrace();
@@ -142,7 +142,7 @@ public class Student extends Person implements implement{
                     pstmt.setInt(1,stuID);
                     ResultSet rs=pstmt.executeQuery();//查找学生,放入ResultSet内
                     while(rs.next()){//打印学生信息
-                        System.out.println(rs.getInt(1)+rs.getString(2)+rs.getString(3));
+                        System.out.println(rs.getInt(1)+"\t\t"+rs.getString(2)+"\t\t"+rs.getString(3));
                     }
                     return 0;//正常打印了学生信息
                 }catch (SQLException e) {//删除过程中出现异常
@@ -188,7 +188,7 @@ public class Student extends Person implements implement{
         try{
             if(Student_IfNumberExists(num)){//找到了学生
 
-                display(num);
+                // display(num);
 
                 String sql="delete from student where stuId=?";//删除的sql
                 PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
@@ -239,30 +239,33 @@ public class Student extends Person implements implement{
     }
     public void show()
     {
-        System.out.println("学生信息如下");
+        // System.out.println("学生信息如下");
         System.out.println("姓名\t\t学号\t\t性别");
         System.out.println(getName()+"\t\t"+getStuNo()+"\t\t"+getSex());
     }
     public void change()
     {
-        System.out.println("请选择修改的选项 1.姓名 2.性别");
-        Scanner in = new Scanner(System.in);
-        switch (in.nextInt())
-        {
-            case 1:
-                System.out.println("请输入姓名");
-                this.setName(in.next());
-                break;
-            case 2:
-                System.out.println("请输入性别 1.male 2.female");
-                if(in.nextInt()==1)
-                    setSex(true);
-                else
-                    setSex(false);
-                break;
-            default:
-                System.out.println("输入错误");
-                break;
-        }
+		while(true){
+			System.out.println("请选择:\n1. 姓名\n2. 性别\n0. 退出");
+			Scanner in = new Scanner(System.in);
+			switch (in.nextInt())
+			{
+				case 1:
+					System.out.println("请输入学生姓名:");
+					this.setName(in.next());
+					break;
+				case 2:
+					System.out.println("请输入学生性别:\n1. 男\n2. 女");
+					if(in.nextInt()==1)
+						setSex(true);
+					else
+						setSex(false);
+					break;
+				case 0:
+					return;
+				default:
+					System.out.println("您的输入有误, 请重新输入!");
+			}	
+		}
     }
 }

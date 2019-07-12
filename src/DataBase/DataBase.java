@@ -24,7 +24,7 @@ public class DataBase
         try{
             try{
                 Class.forName( "com.mysql.cj.jdbc.Driver");
-                System.out.println("数据库驱动加载成功");//可以注释掉
+                System.out.println("数据库驱动加载成功!");//可以注释掉
             }catch(ClassNotFoundException e){}
             //连接数据库
             //String name="com.mysql.jdbc.Driver";///加载jdbc driver
@@ -33,10 +33,10 @@ public class DataBase
 
             connection=DriverManager.getConnection("jdbc:mysql://wangqy.top:3306/dormitory?verifyServerCertificate=false&useSSL=false","didong","wangqytop");//TODO:域名等信息不详
             statement=connection.createStatement();
-            System.out.println("连接数据库成功");
+            System.out.println("数据库连接成功!");
         }catch(Exception e){
             //e.printStackTrace();
-            System.out.println("连接失败,(DB41)");
+            System.out.println("数据库连接失败!");
         }
     }
     public static void DataBase_Disconnect(){
@@ -51,9 +51,9 @@ public class DataBase
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             //e.printStackTrace();
-            System.out.println("断开连接失败");
+            System.out.println("数据库断开连接失败!");
         }
-        System.out.println("数据库断开连接");
+        System.out.println("数据库断开连接成功!");
     }
 
 }
