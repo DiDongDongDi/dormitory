@@ -427,7 +427,7 @@ public class Block implements implement{
             PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
             pstmt.setInt(1,OneBuildingId);
             ResultSet rs=pstmt.executeQuery();//查找宿舍楼,放入ResultSet内
-            System.out.println("楼号\t\t管理员ID\t\t男or女寝\t\t楼层数\t\t每层房间数");
+            System.out.println("楼号\t\t管理员工号\t\t性别\t\t楼层数\t\t每层房间数");
             while(rs.next()){//打印宿舍楼信息
                 System.out.println(
                                 rs.getInt(1)+"\t\t"+
