@@ -128,8 +128,9 @@ public class Superior extends Person implements implement{
 
         } catch (SQLException e) {
             System.out.println("管理员store时出现异常");
+            e.printStackTrace();
             return 1;
-            //e.printStackTrace();
+
         }
         return 0;
     }
@@ -145,7 +146,7 @@ public class Superior extends Person implements implement{
         //查找失败返回1
         //未找到返回3
         //直接从数据库查找显示即可
-        if(If_SuperNumberExists(num)){//是否找到管理员?(boolean)
+        if(!If_SuperNumberExists(num)){//是否找到管理员?(boolean)
             return 3;
         }
         else{
@@ -153,13 +154,14 @@ public class Superior extends Person implements implement{
                 String sql="select * from super where supId=?";//查找的sql
                 PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setInt(1,num);
+                System.out.println("查找管理员");
                 ResultSet rs=pstmt.executeQuery();//查找管理员,放入ResultSet内
                 while(rs.next()){//打印管理员信息
                     System.out.println(
-                            rs.getInt(1)+
-                                    rs.getString(2)+
-                                    rs.getString(3)+
-                                    rs.getInt(4));
+                            rs.getInt(1)+"\t\t"+
+                                    rs.getString(2)+"\t\t"+
+                                    rs.getString(3)+"\t\t"+
+                                    rs.getString(4));
                     }
                     return 0;//正常打印了管理员信息
                 }catch (SQLException e) {//删除过程中出现异常
