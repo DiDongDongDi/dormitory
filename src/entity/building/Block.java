@@ -25,8 +25,41 @@ public class Block implements implement{
 	public Block(int buildId){
 		this.buildId = buildId;
 	}
-	public void change(){
-		
+	public void change(){//TODO:
+	    Scanner scanner=new Scanner(System.in);
+		while(true){
+            System.out.println("请输入您要更新的信息 1.性别 2.管理员ID  ");
+            int choose=scanner.nextInt();
+            if(choose==1){
+                while(true){
+                    System.out.println("请输入 1.男 2.女  ");
+                    int ch=scanner.nextInt();
+                    if(ch==1){
+                        setGender("男");
+                        break;
+                    }
+                    if(ch==2){
+                        setGender("女");
+                        break;
+                    }
+                    System.out.println("输入错误,请重新输入");
+                }
+            }
+            if(choose==2){
+                while(true){
+                    System.out.println("请输入新的管理员ID  ");
+                    int ch=scanner.nextInt();
+                    if(ch<0){
+                        System.out.println("输入错误,请重新输入");
+                    }
+                    else{
+                        setSuperId(ch);
+                        break;
+                    }
+
+                }
+            }
+        }
 	}
 	public void postMessage(){
 		
@@ -431,10 +464,10 @@ public class Block implements implement{
         }
     }
 
-    public int update() {
+    public int update() {//TODO:
         int num=getBuildId();
         if(!IfBuildingExists(num)){//号码不存在!
-            return 1;
+            return 2;
         }
         else{
             try{
@@ -446,7 +479,7 @@ public class Block implements implement{
 
                 if(!rs.getString(3).equals(this.getGender())&&IfBuildingHasStudent(num)){
                     //如果宿舍里面有人并且试图(更换)性别,阻止更新
-                    return 1;
+                    return 3;
                 }
             }catch (SQLException e) {
                 System.out.println("update宿舍楼检查更新条件时出现异常");//此处最后可以注释掉
@@ -454,12 +487,29 @@ public class Block implements implement{
                 return 1;
             }
         }
-        try{
-            String sql="update buildings set supId=?,gender=? where buildId= ?";//查找的sql
-            PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
-            pstmt.setInt(1,getSuperId());
-            pstmt.setString(2,getGender());
-            pstmt.setInt(3,getBuildId());
+        try{//todo:supId为外码
+            Superior suptemp=new Superior();
+            boolean existSuper=true;
+            String sql=null;
+            PreparedStatement pstmt=null;
+            if(2==suptemp.search(getSuperId())){
+                existSuper=false;
+            }
+            if(existSuper) {
+                sql = "update buildings set supId=?,gender=? where buildId= ?";//查找的sql
+                pstmt=DataBase.getConnection().prepareStatement(sql);
+                pstmt.setInt(1,getSuperId());
+                pstmt.setString(2,getGender());
+                pstmt.setInt(3,getBuildId());
+            }
+            else{
+                System.out.println("您输入的管理员ID不存在于数据库中,管理员将被置为空值");
+                sql = "update buildings set supId=null,gender=? where buildId= ?";//查找的sql
+                pstmt=DataBase.getConnection().prepareStatement(sql);
+                pstmt.setString(1,getGender());
+                pstmt.setInt(2,getBuildId());
+            }
+
             if (1==pstmt.executeUpdate()){
                 return 0;
             }
