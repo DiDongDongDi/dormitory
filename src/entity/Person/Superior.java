@@ -60,7 +60,34 @@ public class Superior extends Person implements implement{
         setSupId(no);
         System.out.println("登记成功");
     }
-
+    public void show()
+    {
+        System.out.println("学生信息如下");
+        System.out.println("姓名\t\t学号\t\t性别");
+        System.out.println(getName()+"\t\t"+getSupId()+"\t\t"+getSex());
+    }
+    public void change()
+    {
+        System.out.println("请选择修改的选项 1.姓名 2.性别");
+        Scanner in = new Scanner(System.in);
+        switch (in.nextInt())
+        {
+            case 1:
+                System.out.println("请输入姓名");
+                this.setName(in.next());
+                break;
+            case 2:
+                System.out.println("请输入性别 1.male 2.female");
+                if(in.nextInt()==1)
+                    setSex(true);
+                else
+                    setSex(false);
+                break;
+            default:
+                System.out.println("输入错误");
+                break;
+        }
+    }
     private static boolean If_SuperNumberExists(int num){ //给定工号判断是否存在于数据库,静态,仅供操作数据库的方法内部使用
         try{
             PreparedStatement pstmt = null;
