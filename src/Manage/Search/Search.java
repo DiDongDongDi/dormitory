@@ -30,7 +30,7 @@ public class Search{
 					searchBuildingFloor();
 					break;
 				case 4:
-
+					searchBuildingRoom();
 					break;
 				case 0:
 					System.out.println("成功退出查找!");

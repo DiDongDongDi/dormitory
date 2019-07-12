@@ -5,7 +5,7 @@ import entity.building.*;
 
 public class MessageManage{
 	public static void start(int buildId){
-		//Block building = new Block(buildId);
+		Block building = new Block(buildId);
 		while(true){
 			System.out.println("请选择:");
 			System.out.println("1. 发布消息");

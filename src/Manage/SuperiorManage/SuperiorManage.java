@@ -148,32 +148,32 @@ public class SuperiorManage{
 	}
 
 	private int changeSuperiorInDB(int supID){
-		/* Superior sup = new Superior(supID); */
-		// int res = sup.load();
-		// if(res == 2)
+		Superior sup = new Superior(supID);
+		int res = sup.load();
+		if(res == 2)
 			return 3;
-		// if(res == 1)
-			// return 4;
-		// sup.change();//非数据库的操作
-		// System.out.println("更改后的职工信息为:");
-		// sup.show();//非数据库的操作
-		// System.out.println("确认更改吗?(y/n)");
-		// Scanner sc = new Scanner(System.in);
-		// String choose = sc.next();
-		// while(true){
-			// if(choose.equals("y")){
-				// if(sup.update()==0)//注意这里是update函数
-					// return 0;
-				// else
-					// return 1;
-			// }
-			// else if(choose.equals("n")){
-				// return 2;
-			// }
-			// else{
-				// System.out.println("您的输入有误, 请重新输入!");
-			// }
-		/* } */
+		if(res == 1)
+			return 4;
+		sup.change();//非数据库的操作
+		System.out.println("更改后的职工信息为:");
+		sup.show();//非数据库的操作
+		System.out.println("确认更改吗?(y/n)");
+		Scanner sc = new Scanner(System.in);
+		String choose = sc.next();
+		while(true){
+			if(choose.equals("y")){
+				if(sup.update()==0)//注意这里是update函数
+					return 0;
+				else
+					return 1;
+			}
+			else if(choose.equals("n")){
+				return 2;
+			}
+			else{
+				System.out.println("您的输入有误, 请重新输入!");
+			}
+		}
 	}
 
 	private void searchSuperior(){

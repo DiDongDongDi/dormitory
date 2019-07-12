@@ -11,13 +11,16 @@ import java.util.Scanner;
 import DataBase.*;
 
 public class Block implements implement{
-    private static int buildId=1;
+    private int buildId;
     private int maxFloor;
     private int maxRoom;
     private int superId;
     private boolean gender;
     private File problemFile;
     private File postFile;
+	public Block(int buildId){
+		this.buildId = buildId;
+	}
     public String getGender(){
         return gender?"男":"女";
     }

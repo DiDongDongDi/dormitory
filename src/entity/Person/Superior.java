@@ -29,6 +29,10 @@ public class Superior extends Person implements implement{
 
     public Superior(){}
 
+	public Superior(int supId){
+		this.supId = supId;
+	}
+
     public void create_super()
     {
         Scanner in=new Scanner(System.in);
