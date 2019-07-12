@@ -26,10 +26,13 @@ public class SuperiorManage{
 					addSuperior();
 					break;
 				case 2:
+					deleteSuperior();
 					break;
 				case 3:
+					changeSuperior();
 					break;
 				case 4:
+					searchSuperior();
 					break;
 				case 0:
 					System.out.println("成功退出职工管理!");
@@ -43,19 +46,19 @@ public class SuperiorManage{
 	private void addSuperior(){
 		Superior sup = (Superior)(fac.addPerson(2));
 		System.out.println("您要添加的职工信息为:");
-		//sup.show();//非数据库操作函数
+		// sup.show();//非数据库操作函数
 		System.out.println("确认添加吗?(y/n)");
 		Scanner sc = new Scanner(System.in);
 		String choose = sc.next();
 		while(true){
 			if(choose.equals("y")){
-				//int res = sup.store();
-				/* if(res==0) */
-					// System.out.println("添加职工信息成功!");
-				// else if(res==1)
-					// System.out.println("添加职工信息失败!");
-				// else if(res==2)
-					// System.out.println("工号重复, 添加职工信息失败!");
+				int res = sup.store();
+				if(res==0)
+					System.out.println("添加职工信息成功!");
+				else if(res==1)
+					System.out.println("添加职工信息失败!");
+				else if(res==2)
+					System.out.println("工号重复, 添加职工信息失败!");
 				break;
 			}
 			else if(choose.equals("n")){
@@ -93,28 +96,28 @@ public class SuperiorManage{
 
 	private int deleteSuperiorInDB(int supID){
 		Superior sup = new Superior();
-		/* if(sup.search(supID)==0){ */
-			// System.out.println("您要删除的职工信息为:");
-			// sup.display(supID);
-			// System.out.println("确认删除吗?(y/n)");
-			// Scanner sc = new Scanner(System.in);
-			// String choose = sc.next();
-			// while(true){
-				// if(choose.equals("y")){
-					// if(sup.delete(supID)==0)
-						// return 0;
-					// else
-						// return 1;
-				// }
-				// else if(choose.equals("n")){
-					// return 2;
-				// }
-				// else{
-					// System.out.println("您的输入有误, 请重新输入!");
-				// }
-			// }
-		// }
-		/* else */
+		if(sup.search(supID)==0){
+			System.out.println("您要删除的职工信息为:");
+			sup.display(supID);
+			System.out.println("确认删除吗?(y/n)");
+			Scanner sc = new Scanner(System.in);
+			String choose = sc.next();
+			while(true){
+				if(choose.equals("y")){
+					if(sup.delete(supID)==0)
+						return 0;
+					else
+						return 1;
+				}
+				else if(choose.equals("n")){
+					return 2;
+				}
+				else{
+					System.out.println("您的输入有误, 请重新输入!");
+				}
+			}
+		}
+		else
 			return 3;
 	}
 
@@ -145,32 +148,32 @@ public class SuperiorManage{
 	}
 
 	private int changeSuperiorInDB(int supID){
-		// Superior sup = new Superior(supID);
+		/* Superior sup = new Superior(supID); */
 		// int res = sup.load();
-		/* if(res == 2) */
-			// return 3;
+		// if(res == 2)
+			return 3;
 		// if(res == 1)
-			/* return 4; */
+			// return 4;
 		// sup.change();//非数据库的操作
-		System.out.println("更改后的职工信息为:");
+		// System.out.println("更改后的职工信息为:");
 		// sup.show();//非数据库的操作
-		System.out.println("确认更改吗?(y/n)");
-		Scanner sc = new Scanner(System.in);
-		String choose = sc.next();
-		while(true){
-			if(choose.equals("y")){
-				/* if(sup.update()==0)//注意这里是update函数 */
+		// System.out.println("确认更改吗?(y/n)");
+		// Scanner sc = new Scanner(System.in);
+		// String choose = sc.next();
+		// while(true){
+			// if(choose.equals("y")){
+				// if(sup.update()==0)//注意这里是update函数
 					// return 0;
 				// else
-					/* return 1; */
-			}
-			else if(choose.equals("n")){
-				return 2;
-			}
-			else{
-				System.out.println("您的输入有误, 请重新输入!");
-			}
-		}
+					// return 1;
+			// }
+			// else if(choose.equals("n")){
+				// return 2;
+			// }
+			// else{
+				// System.out.println("您的输入有误, 请重新输入!");
+			// }
+		/* } */
 	}
 
 	private void searchSuperior(){
@@ -192,15 +195,15 @@ public class SuperiorManage{
 
 	private int searchSuperiorInDB(int supID){
 		Superior sup = new Superior();
-		/* int res = sup.search(supID); */
-		// if(res==0){
-			// System.out.println("该工号对应的职工信息为:");
-			// sup.display(supID);
-			// return 0;
-		// }
-		// else if(res==1)
-			// return 1;
-		/* else */
+		int res = sup.search(supID);
+		if(res==0){
+			System.out.println("该工号对应的职工信息为:");
+			sup.display(supID);
+			return 0;
+		}
+		else if(res==1)
+			return 1;
+		else
 			return 3;
 	}
 }

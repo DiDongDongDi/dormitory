@@ -10,9 +10,11 @@ public class Search{
 	
 	public void start(){
 		while(true){
-			System.out.println("请选择查找方式:");
-			System.out.println("1. 根据学号查找");
-			System.out.println("2. 根据宿舍查找");
+			System.out.println("请选择:");
+			System.out.println("1. 根据学号查找宿舍");
+			System.out.println("2. 根据宿舍查找学号");
+			System.out.println("3. 查看宿舍楼楼层状况");
+			System.out.println("4. 查看宿舍楼房间状况");
 			System.out.println("0. 退出");
 
 			Scanner sc = new Scanner(System.in);
@@ -23,6 +25,12 @@ public class Search{
 					break;
 				case 2:
 					searchByDormitory();
+					break;
+				case 3:
+					searchBuildingFloor();
+					break;
+				case 4:
+
 					break;
 				case 0:
 					System.out.println("成功退出查找!");
@@ -61,5 +69,29 @@ public class Search{
 		//没有找到的话, 需要提示
 		System.out.println("该宿舍的学生信息为:");
 		StudentAndRoom.displayInDB(building, floor, room);
+	}
+
+	private void searchBuildingFloor(){
+		System.out.println("请输入需要查找的宿舍楼的楼号:");
+		Scanner sc = new Scanner(System.in);
+		int buildId = sc.nextInt();
+		if(buildId<=0){
+			System.out.println("您的输入有误!");
+			return;
+		}
+		System.out.println("该宿舍楼的各楼层的状况为:");
+		BuildingStatus.showFloorStatus(buildId);
+	}
+
+	private void searchBuildingRoom(){
+		System.out.println("请输入需要查找的宿舍楼的楼号:");
+		Scanner sc = new Scanner(System.in);
+		int buildId = sc.nextInt();
+		if(buildId<=0){
+			System.out.println("您的输入有误!");
+			return;
+		}
+		System.out.println("该宿舍楼的各房间的状况为:");	
+		BuildingStatus.showRoomStatus(buildId);
 	}
 }
