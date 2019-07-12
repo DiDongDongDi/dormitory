@@ -9,13 +9,13 @@ import implement.implement;
 public class Superior extends Person implements implement{
 
     private int supId;
-    private int phoneNum;
+    private String phoneNum;
 
-    public int getPhoneNum() {
+    public String getPhoneNum() {
         return phoneNum;
     }
 
-    public void setPhoneNum(int phoneNum) {
+    public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
 
@@ -38,12 +38,12 @@ public class Superior extends Person implements implement{
         Scanner in=new Scanner(System.in);
         int no;
         boolean flg=true;
-        System.out.println("欢迎办理入住手续！");
-        System.out.print("请输入您的姓名：");
+        // System.out.println("欢迎办理入住手续！");
+        System.out.println("请输入职工姓名:");
         String names=in.next();
         setName(names);
         while(flg){
-            System.out.print("请输入您的性别 1.男性 2.女性");
+            System.out.println("请选择职工性别\n1. 男\n2. 女");
         switch (in.nextInt())
         {
             case 1:
@@ -55,19 +55,21 @@ public class Superior extends Person implements implement{
                 flg=false;
                 break;
             default:
-                System.out.println("输入错误");
+                System.out.println("您的输入有误!");
                 break;
         }}
-        System.out.print("请输入您的工号：");
+        System.out.println("请输入职工工号:");
         no=in.nextInt();
         setSupId(no);
-        System.out.println("登记成功");
+		System.out.println("请输入职工电话号码:");
+		setPhoneNum(in.next());
+        // System.out.println("登记成功");
     }
     public void show()
     {
-        System.out.println("学生信息如下");
-        System.out.println("姓名\t\t学号\t\t性别");
-        System.out.println(getName()+"\t\t"+getSupId()+"\t\t"+getSex());
+        // System.out.println("学生信息如下");
+        System.out.println("姓名\t\t工号\t\t性别\t\t电话号码");
+        System.out.println(getName()+"\t\t"+getSupId()+"\t\t"+getSex()+"\t\t"+getPhoneNum());
     }
     public void change()
     {

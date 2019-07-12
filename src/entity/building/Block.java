@@ -161,22 +161,22 @@ public class Block implements implement{
    public void create_building()//自动创建大楼,但是要在factory里面盖楼
     {
         Scanner in=new Scanner(System.in);
-        System.out.println("这是男生宿舍还是女生宿舍 1.男生 2.女生");
+        System.out.println("请选择宿舍性别\n1. 男\n2. 女");
         if(in.nextInt()==1)
             gender=true;
         else
             gender=false;
         setBuildId(getBuildId()+1);
-        System.out.println("请输入这栋楼有多少楼层");
+        System.out.println("请输入楼层数目:");
         setMaxFloor(in.nextInt());
-        System.out.println("请输入一层有多少房间");
+        System.out.println("请输入每层房间数:");
         setMaxRoom(in.nextInt());
         for(int i=1;i<=getMaxFloor();i++)
         {
             for(int j=1;j<=getMaxRoom();j++)
                 roomList.add(new room(i,j));
         }
-        System.out.println("请输入管理员id");
+        System.out.println("请输入宿舍管理员工号:");
         setSuperId(in.nextInt());
     }
 
@@ -417,9 +417,9 @@ public class Block implements implement{
     }
     public void show()
     {
-        System.out.println(buildId+"号宿舍楼信息如下：");
-        System.out.println("性别\t\t楼层数\t\t总房间数\t\t管理员id");
-        System.out.println(getSex()+"\t\t"+maxFloor+"\t\t"+maxFloor*maxRoom+"\t\t"+superId);
+        // System.out.println(buildId+"号宿舍楼信息如下：");
+        System.out.println("性别\t\t楼层数\t\t每层房间数\t\t管理员工号");
+        System.out.println(getSex()+"\t\t"+maxFloor+"\t\t"+maxRoom+"\t\t"+superId);
 
     }
 }

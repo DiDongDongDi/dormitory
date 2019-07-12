@@ -46,7 +46,7 @@ public class SuperiorManage{
 	private void addSuperior(){
 		Superior sup = (Superior)(fac.addPerson(2));
 		System.out.println("您要添加的职工信息为:");
-		// sup.show();//非数据库操作函数
+		sup.show();//非数据库操作函数
 		System.out.println("确认添加吗?(y/n)");
 		Scanner sc = new Scanner(System.in);
 		String choose = sc.next();
