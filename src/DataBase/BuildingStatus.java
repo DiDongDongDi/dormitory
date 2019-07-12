@@ -10,7 +10,8 @@ public class BuildingStatus {
 			pstmt.setInt(1, buildId);
 			ResultSet rs = pstmt.executeQuery();
 			System.out.println("BuildId\t\t\tFloorId\t\t\tBrokenwaterNum\t\t\tBrokenLightNum");
-			if (!rs.wasNull()) {
+			if (rs.next()) {
+				rs.previous();
 				while (rs.next()) {
 					int BuildId = rs.getInt("buildId");
 					int FloorId = rs.getInt("floorId");
@@ -33,7 +34,8 @@ public class BuildingStatus {
 			pstmt.setInt(1, buildId);
 			ResultSet rs = pstmt.executeQuery();
 			System.out.println("BuildId\t\t\tFloorId\t\t\telecBill\t\t\thealScore");
-			if (!rs.wasNull()) {
+			if (rs.next()) {
+				rs.previous();
 				while (rs.next()) {
 					int BuildId = rs.getInt("buildId");
 					int FloorId = rs.getInt("floorId");

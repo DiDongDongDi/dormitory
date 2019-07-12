@@ -3,6 +3,8 @@ package entity.building;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
+
 import DataBase.*;
 
 
@@ -16,7 +18,35 @@ public class room {
     private double healScore;
 
 	public void change(){
-		
+        Scanner scanner=new Scanner(System.in);
+        while(true){
+            System.out.println("请输入您要更新的信息 1.电费余量 2.卫生分数  ");
+            int choose=scanner.nextInt();
+            if(choose==1){
+                while(true){
+                    System.out.println("请输入新的电费余量 ");
+                    double ch=scanner.nextDouble();
+                    setElecBillBala(ch);
+                    break;
+                }
+                break;
+            }
+            if(choose==2){
+                while(true){
+                    System.out.println("请输入损坏的饮水机数  ");
+                    double ch=scanner.nextDouble();
+                    if(ch<0){
+                        System.out.println("输入错误,请重新输入");
+                    }
+                    else{
+                        setHealScore(ch);
+                        break;
+                    }
+                }
+                break;
+            }
+
+        }
 	}
 
     public void setElecBillBala(double elecBillBala) {
@@ -188,6 +218,7 @@ public class room {
     }
     public int update(){
         if(!If_roomExists(getBlockId(),getFloorId(),getRoomId())){//号码不存在!
+
             return 2;
         }
         else{
