@@ -262,13 +262,13 @@ public class StudentAndRoom {
     }
 
 
-    //在数据库中删除学生信息,删除成功返回true
+    //学生退房，退房成功返回true
     public static boolean delete(int stuID)
     {
         try {
             if(isAllocated(stuID))
             {
-                String sql ="delete from student_and_room where stuId = ? ";
+                String sql ="update  student_and_room  set stuId = null where stuId = ? ";
                 PreparedStatement pstmt = DataBase.getConnection().prepareStatement(sql);
                 pstmt.setInt(1,stuID);
                 pstmt.executeUpdate();
