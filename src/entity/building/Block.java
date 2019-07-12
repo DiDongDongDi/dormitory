@@ -18,8 +18,20 @@ public class Block implements implement{
     private boolean gender;
     private File problemFile;
     private File postFile;
+	public Block(){
+		
+	}
 	public Block(int buildId){
 		this.buildId = buildId;
+	}
+	public void change(){
+		
+	}
+	public void postMessage(){
+		
+	}
+	public void showHistoryMessage(){
+		
 	}
     public String getGender(){
         return gender?"男":"女";

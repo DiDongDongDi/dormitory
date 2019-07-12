@@ -37,7 +37,6 @@ public class Superior extends Person implements implement{
     {
         Scanner in=new Scanner(System.in);
         int no;
-        int sex;
         boolean flg=true;
         System.out.println("欢迎办理入住手续！");
         System.out.print("请输入您的姓名：");

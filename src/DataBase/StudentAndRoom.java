@@ -1,7 +1,6 @@
 package DataBase;
 
 import java.sql.*;
-import java.util.*;
 import entity.Person.*;
 public class StudentAndRoom {
     public static void displayInDB(int StuID){//根据学生学号查找宿舍信息并输出

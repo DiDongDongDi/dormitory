@@ -1,7 +1,5 @@
 package DataBase;
 import java.sql.*;
-import java.util.*;
-import entity.Person.*;
 
 public class BuildingStatus {
 	public static void showFloorStatus(int buildId) {

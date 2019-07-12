@@ -3,11 +3,8 @@ package entity.building;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
 import DataBase.*;
 
-import java.util.Scanner;
-import Manage.RoomManage.RoomManage;
 
 public class room {
     private int blockId;
@@ -17,6 +14,10 @@ public class room {
     private boolean []bedId;
     private double elecBillBala;
     private double healScore;
+
+	public void change(){
+		
+	}
 
     public void setElecBillBala(double elecBillBala) {
         this.elecBillBala = elecBillBala;

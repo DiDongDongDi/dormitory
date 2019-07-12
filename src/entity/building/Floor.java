@@ -11,9 +11,14 @@ public class Floor {
     private int floorId;
     private int brokenWaterNum;
     private int brokenLightNum;
-    public Floor (){
-        ;
+    public Floor(){
+        
     }
+
+	public void change(){
+		
+	}
+
     public Floor(int bI,int fI)
     {
         this.buildId=bI;

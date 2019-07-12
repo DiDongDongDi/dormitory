@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import DataBase.*;
 import implement.implement;
-import java.util.Scanner;
 
 public class Student extends Person implements implement{
     private int stuNo;
@@ -25,7 +24,6 @@ public class Student extends Person implements implement{
     {
         Scanner in=new Scanner(System.in);
         int no;
-        int sex;
         boolean flg=true;
         System.out.println("欢迎办理入住手续！");
         System.out.print("请输入您的姓名：");

@@ -1,9 +1,7 @@
 package Manage.RoomManage;
 
 import java.util.*;
-import entity.Person.*;
 import entity.building.*;
-import DataBase.*;
 public class RoomManage {
    public RoomManage(){}
 

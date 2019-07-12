@@ -15,10 +15,10 @@ public class MessageManage{
 			int op = sc.nextInt();
 			switch(op){
 				case 1:
-					//building.postMessage();
+					building.postMessage();
 					break;
 				case 2:
-					//building.showHistoryMessage();
+					building.showHistoryMessage();
 					break;
 				case 0:
 					System.out.println("成功退出宿舍楼消息管理!");
