@@ -164,6 +164,7 @@ public class Superior extends Person implements implement{
                 // System.out.println("查找管理员");
                 ResultSet rs=pstmt.executeQuery();//查找管理员,放入ResultSet内
                 while(rs.next()){//打印管理员信息
+					System.out.println("姓名\t\t工号\t\t性别\t\t电话号码");
                     System.out.println(
                             rs.getInt(1)+"\t\t"+
                                     rs.getString(2)+"\t\t"+

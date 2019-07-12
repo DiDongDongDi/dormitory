@@ -142,6 +142,7 @@ public class Student extends Person implements implement{
                     pstmt.setInt(1,stuID);
                     ResultSet rs=pstmt.executeQuery();//查找学生,放入ResultSet内
                     while(rs.next()){//打印学生信息
+						System.out.println("姓名\t\t学号\t\t性别");
                         System.out.println(rs.getInt(1)+"\t\t"+rs.getString(2)+"\t\t"+rs.getString(3));
                     }
                     return 0;//正常打印了学生信息
