@@ -49,7 +49,7 @@ public class StudentAndRoom {
                     int stuId = rs.getInt("stuId");
                     int BedId = rs.getInt("bedId");
                     System.out.println(stuId==0?"     ":stuId + "\t\t\t" + BedId);//输出信息
-
+                    //System.out.println("dsa");
                 }
             }
             else
@@ -131,15 +131,16 @@ public class StudentAndRoom {
                         floor = rs.getInt("floorId");
                         bed = rs.getInt("bedId");
                     }
-                    String sql2 = "update student_and_room set buildId = ? and floorId = ? and roomId = ? and bedId = ? where stuId = ?";
+                    String sql2 = "update student_and_room set stuId = ? where buildId = ? and floorId = ? and roomId = ? and bedId = ?  ";
                     psmst = DataBase.getConnection().prepareStatement(sql2);
-                    psmst.setInt(1,build);
-                    psmst.setInt(2,floor);
-                    psmst.setInt(3,room);
-                    psmst.setInt(4,bed);
-                    psmst.setInt(5,student.getStuNo());
-                    psmst.executeUpdate();
-                    return true;
+                    psmst.setInt(2,build);
+                    psmst.setInt(3,floor);
+                    psmst.setInt(4,room);
+                    psmst.setInt(5,bed);
+                    psmst.setInt(1,student.getStuNo());
+                    if(1==psmst.executeUpdate())
+                        return true;
+                    return false;
                 }
             }
             else if(student.getSex().equals("女"))
@@ -158,13 +159,13 @@ public class StudentAndRoom {
                         floor = rs.getInt("floorId");
                         bed = rs.getInt("bedId");
                     }
-                    String sql2 = "update student_and_room set buildId = ? and floorId = ? and roomId = ? and bedId = ? where stuId = ?";
+                    String sql2 = "update student_and_room set stuId = ? where buildId = ? and floorId = ? and roomId = ? and bedId = ?  ";
                     psmst = DataBase.getConnection().prepareStatement(sql2);
-                    psmst.setInt(1,build);
-                    psmst.setInt(2,floor);
-                    psmst.setInt(3,room);
-                    psmst.setInt(4,bed);
-                    psmst.setInt(5,student.getStuNo());
+                    psmst.setInt(2,build);
+                    psmst.setInt(3,floor);
+                    psmst.setInt(4,room);
+                    psmst.setInt(5,bed);
+                    psmst.setInt(1,student.getStuNo());
                     psmst.executeUpdate();
                     return true;
                 }
@@ -173,6 +174,7 @@ public class StudentAndRoom {
                 return false;
         }catch (SQLException e)
         {
+            e.printStackTrace();
             return false;
         }
     }
