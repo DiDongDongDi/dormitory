@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import DataBase.*;
+import java.util.Scanner;
 
 public class Floor {
     private int buildId;
@@ -16,7 +17,38 @@ public class Floor {
     }
 
 	public void change(){
-		
+        Scanner scanner=new Scanner(System.in);
+        while(true){
+            System.out.println("请输入您要更新的信息 1.损坏的灯数 2.损坏的饮水机数  ");
+            int choose=scanner.nextInt();
+            if(choose==1){
+                while(true){
+                    System.out.println("请输入损坏的灯数 ");
+                    int ch=scanner.nextInt();
+                    if(ch>0){
+                        setBrokenLightNum(ch);
+                        break;
+                    }
+                    System.out.println("输入错误,请重新输入");
+                }
+                break;
+            }
+            if(choose==2){
+                while(true){
+                    System.out.println("请输入损坏的饮水机数  ");
+                    int ch=scanner.nextInt();
+                    if(ch<0){
+                        System.out.println("输入错误,请重新输入");
+                    }
+                    else{
+                        setBrokenWaterNum(ch);
+                        break;
+                    }
+                }
+                break;
+            }
+
+        }
 	}
 
     public Floor(int bI,int fI)
@@ -80,7 +112,8 @@ public class Floor {
         //查找失败返回1
         //未找到返回3
         //直接从数据库查找显示即可
-        if(!If_FloorExists(blockId,floorId)){//房间不存在
+        if(!If_FloorExists(blockId,floorId)){//楼层不存在
+            System.out.println("楼层不存在");
             return 3;
         }
         try{
@@ -136,12 +169,13 @@ public class Floor {
     }
     public int update(){
         if(!If_FloorExists(getBuildId(),getFloorId())){//号码不存在!
+            System.out.println("楼层不存在");
             return 2;
         }
         else{
             try{
                 PreparedStatement pstmt = null;
-                String sql="update floor set brokenWaterNum=?,brokenLightNum=? where buildId=? and floorId=? ";//查找的sql
+                String sql="update floors set brokenWaterNum=?,brokenLightNum=? where buildId=? and floorId=? ";//查找的sql
                 pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setInt(1,getBrokenWaterNum());
                 pstmt.setInt(2,getBrokenLightNum());
