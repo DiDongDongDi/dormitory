@@ -2,17 +2,29 @@ import java.util.*;
 import Manage.StudentManage.*;
 import Manage.Search.*;
 import Manage.ExchangeDormitoryManage.*;
+import Manage.BuildingManage.*;
+import Manage.FloorManage.*;
+import Manage.RoomManage.*;
+import Manage.SuperiorManage.*;
 
 public class DormitoryManage{
 
 	StudentManage SM;
 	Search search;
 	ExchangeDormitoryManage EDM;
+	BuildingManage BM;
+	FloorManage FM;
+	RoomManage RM;
+	SuperiorManage SRM;
 
 	DormitoryManage(){
 		SM = new StudentManage();
 		search = new Search();
 		EDM = new ExchangeDormitoryManage();
+		BM = new BuildingManage();
+		FM = new FloorManage();
+		RM = new RoomManage();
+		SRM = new SuperiorManage();
 	}
 	
 	public void start(){//进入宿舍管理系统
@@ -35,7 +47,7 @@ public class DormitoryManage{
 					SM.start();
 					break;
 				case 2:
-					
+					BM.start();
 					break;
 				case 3:
 					EDM.start();
@@ -44,13 +56,13 @@ public class DormitoryManage{
 					search.start();
 					break;
 				case 5:
-					
+					SRM.start();
 					break;
 				case 6:
-
+					FM.start();
 					break;
 				case 7:
-
+					RM.start();
 					break;
 				case 0:
 					System.out.println("成功退出宿舍管理系统!");

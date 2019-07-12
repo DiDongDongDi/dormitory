@@ -3,11 +3,9 @@ package Manage.StudentManage;
 import entity.Person.*;
 import entity.factory.*;
 import java.util.*;
-import DataBase.*;
-
 
 public class StudentManage{
-	public static factory fac=new factory();
+	private static factory fac=new factory();
 	public StudentManage(){
 		
 	}
@@ -19,7 +17,7 @@ public class StudentManage{
 			System.out.println("2. 删除学生信息");
 			System.out.println("3. 更改学生信息");
 			System.out.println("4. 查找学生信息");
-			System.out.println("0. 退出学生管理");
+			System.out.println("0. 退出");
 
 			Scanner sc = new Scanner(System.in);
 			int op = sc.nextInt();
@@ -52,17 +50,31 @@ public class StudentManage{
 		//失败返回1
 		//stuID重复返回2
 		//注意显示增加的学生的信息
-	    factory fac=new factory();
-		Student stu = (Student)(fac.addPerson(1));
-		System.out.println("添加的学生信息为:");
+	   	Student stu = (Student)(fac.addPerson(1));
+		System.out.println("您要添加的学生信息为:");
 		stu.show();//非数据库操作函数
-		int res = stu.store();
-		if(res==0)
-			System.out.println("添加学生信息成功!");
-		else if(res==1)
-			System.out.println("添加学生信息失败!");
-		else if(res==2)
-			System.out.println("学号重复, 添加学生信息失败!");
+		System.out.println("确认添加吗?(y/n)");
+		Scanner sc = new Scanner(System.in);
+		String choose = sc.next();
+		while(true){
+			if(choose.equals("y")){
+				int res = stu.store();
+				if(res==0)
+					System.out.println("添加学生信息成功!");
+				else if(res==1)
+					System.out.println("添加学生信息失败!");
+				else if(res==2)
+					System.out.println("学号重复, 添加学生信息失败!");
+				break;
+			}
+			else if(choose.equals("n")){
+				System.out.println("取消操作成功!");
+				break;
+			}
+			else{
+				System.out.println("您的输入有误, 请重新输入!");
+			}
+		}
 	}
 
 	private void deleteStudent(){
@@ -84,7 +96,7 @@ public class StudentManage{
 			System.out.println("取消操作成功!");
 		}
 		else if(res ==3){
-			System.out.println("未找到该学生信息!");
+			System.out.println("未找到该学号对应的学生信息!");
 		}
 	}
 
@@ -140,10 +152,10 @@ public class StudentManage{
 			System.out.println("取消操作成功!");
 		}
 		else if(res == 3){
-			System.out.println("未找到该学生信息!");
+			System.out.println("未找到该学号对应的学生信息!");
 		}
 		else if(res == 4){
-			System.out.println("学生信息加载失败!");
+			System.out.println("该学号对应的学生信息加载失败!");
 		}
 	}
 
@@ -168,7 +180,7 @@ public class StudentManage{
 		stu.change();//非数据库的操作
 		System.out.println("更改后的学生信息为:");
 		stu.show();//非数据库的操作
-		System.out.println("是否保存上述更改?(y/n)");
+		System.out.println("确认更改吗?(y/n)");
 		Scanner sc = new Scanner(System.in);
 		String choose = sc.next();
 		while(true){
@@ -200,7 +212,7 @@ public class StudentManage{
 			System.out.println("查找失败!");
 		}
 		else if(res == 3){
-			System.out.println("未找到该学生信息!");
+			System.out.println("未找到该学号对应的学生信息!");
 		}
 	}
 
@@ -212,7 +224,7 @@ public class StudentManage{
 		Student stu = new Student();
 		int res = stu.search(stuID);
 		if(res==0){
-			System.out.println("该学生的信息如下:");
+			System.out.println("该学号对应的学生信息为:");
 			stu.display(stuID);
 			return 0;
 		}
