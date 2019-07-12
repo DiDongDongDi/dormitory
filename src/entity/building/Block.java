@@ -28,11 +28,11 @@ public class Block implements implement{
 	public void change(){//TODO:
 	    Scanner scanner=new Scanner(System.in);
 		while(true){
-            System.out.println("请输入您要更新的信息 1.性别 2.管理员ID  ");
+            System.out.println("请选择:\n1. 性别\n2. 管理员工号\n0. 退出");
             int choose=scanner.nextInt();
             if(choose==1){
                 while(true){
-                    System.out.println("请输入 1.男 2.女  ");
+                    System.out.println("请选择宿舍性别:\n1. 男\n2. 女");
                     int ch=scanner.nextInt();
                     if(ch==1){
                         setGender("男");
@@ -42,23 +42,26 @@ public class Block implements implement{
                         setGender("女");
                         break;
                     }
-                    System.out.println("输入错误,请重新输入");
+                    System.out.println("您的输入有误, 请重新输入!");
                 }
             }
-            if(choose==2){
+            else if(choose==2){
                 while(true){
-                    System.out.println("请输入新的管理员ID  ");
+                    System.out.println("请输入管理员工号:");
                     int ch=scanner.nextInt();
                     if(ch<0){
-                        System.out.println("输入错误,请重新输入");
+                        System.out.println("您的输入有误, 请重新输入!");
                     }
                     else{
                         setSuperId(ch);
                         break;
                     }
-
                 }
             }
+			else if(choose==0)
+				return;
+			else
+				System.out.println("您的输入有误, 请重新输入!");
         }
 	}
 	public void postMessage(){
@@ -195,7 +198,7 @@ public class Block implements implement{
    public void create_building()//自动创建大楼,但是要在factory里面盖楼
     {
         Scanner in=new Scanner(System.in);
-        System.out.println("请选择宿舍性别\n1. 男\n2. 女");
+        System.out.println("请选择宿舍性别:\n1. 男\n2. 女");
         if(in.nextInt()==1)
             gender=true;
         else
