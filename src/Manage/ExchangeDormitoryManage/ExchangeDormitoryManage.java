@@ -138,7 +138,7 @@ public class ExchangeDormitoryManage{
 		int stuID = stu.getStuNo();
 		if(StudentAndRoom.isAllocated(stuID)){
 			if(StudentAndRoom.isExists(building, floor, room, bed)){
-				if(stu.getSex().equals(BuildingStatus.getGender(stuID))){//性别对比
+				if(stu.getSex().equals(BuildingStatus.getGender(building))){//性别对比
 					System.out.println("该学号对应的床位信息为:");
 					StudentAndRoom.displayInDB(stuID);
 					System.out.println("目标床位对应的床位信息为:");
