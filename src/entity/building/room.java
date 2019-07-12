@@ -142,12 +142,13 @@ public class room {
             pstmt.setInt(2,floorId);
             pstmt.setInt(3,roomId);
             ResultSet rs=pstmt.executeQuery();
+            System.out.println("宿舍楼号\t\t楼层号\t\t房间号\t\t电费余额\t\t卫生评分");
             while(rs.next()){//打印房间信息
                 System.out.println(
-                        rs.getInt(1)+
-                        rs.getInt(2)+
-                        rs.getInt(3)+
-                        rs.getDouble(4)+
+                        rs.getInt(1)+"\t\t"+
+                        rs.getInt(2)+"\t\t"+
+                        rs.getInt(3)+"\t\t"+
+                        rs.getDouble(4)+"\t\t"+
                         rs.getDouble(5));
             }
             return 0;//正常打印了学生信息

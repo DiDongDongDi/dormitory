@@ -14,7 +14,7 @@ public class FloorManage {
                 Scanner sc = new Scanner(System.in);
                 System.out.println("请选择:");
                 System.out.println("1. 查询楼层水机和灯的损坏状况");
-                System.out.println("2. 维修楼层已损坏的水机和灯");
+                System.out.println("2. 修改楼层已损坏的水机和灯");
                 System.out.println("0. 退出");
                 int op = sc.nextInt();
                 switch (op){
@@ -61,8 +61,8 @@ public class FloorManage {
             floor.change();
             int res = floor.update();
             if(res==1)
-                System.out.println("维修成功！");
+                System.out.println("修改成功！");
             else
-                System.out.println("维修失败！");
+                System.out.println("修改失败！");
         }
 }

@@ -91,11 +91,13 @@ public class Floor {
             pstmt.setInt(2,floorId);
 
             ResultSet rs=pstmt.executeQuery();
+            System.out.println("宿舍楼号\t\t 楼层号\t\t已坏的水机数\t\t已坏的灯泡数");
+
             while(rs.next()){//打印floor信息
                 System.out.println(
-                        rs.getInt(1)+
-                                rs.getInt(2)+
-                                rs.getInt(3)+
+                                rs.getInt(1)+"\t\t"+
+                                rs.getInt(2)+"\t\t"+
+                                rs.getInt(3)+"\t\t"+
                                 rs.getInt(4));
             }
             return 0;//正常打印了floor信息
