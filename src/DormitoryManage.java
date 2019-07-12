@@ -23,6 +23,9 @@ public class DormitoryManage{
 			System.out.println("2. 宿舍楼管理");
 			System.out.println("3. 调换宿舍管理");
 			System.out.println("4. 查询");
+			System.out.println("5. 职工管理");
+			System.out.println("6. 宿舍楼层管理");
+			System.out.println("7. 宿舍房间管理");
 			System.out.println("0. 退出系统");
 			
 			Scanner sc = new Scanner(System.in);
@@ -39,6 +42,15 @@ public class DormitoryManage{
 					break;
 				case 4:
 					search.start();
+					break;
+				case 5:
+					
+					break;
+				case 6:
+
+					break;
+				case 7:
+
 					break;
 				case 0:
 					System.out.println("成功退出宿舍管理系统!");
