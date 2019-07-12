@@ -2,10 +2,10 @@ package Manage.RoomManage;
 
 import java.util.*;
 import entity.Person.*;
-import entity.*;
+import entity.building.*;
 import DataBase.*;
 public class RoomManage {
-    RoomManage(){}
+   public RoomManage(){}
 
     public void start()
     {
@@ -55,7 +55,7 @@ public class RoomManage {
         int floorId = sc.nextInt();
         System.out.println("请输入你想操作的房间号:");
         int bedId = sc.nextInt();
-       /* Room room = new Room(buildId,floorId,bedId);
+      /*  room room = new room(buildId,floorId,bedId);
         room.load();
         int res = room.update();
         if(res==1)

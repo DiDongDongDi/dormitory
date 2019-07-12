@@ -6,7 +6,7 @@ import entity.*;
 import DataBase.*;
 
 public class FloorManage {
-        FloorManage(){}
+       public FloorManage(){}
         public  void start()   //start函数
         {
             while(true)
