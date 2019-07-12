@@ -45,7 +45,7 @@ public class FloorManage {
             System.out.println("该楼层水机和灯的损坏状况为：");
             Floor floor = new Floor();
             int res = floor.display(buildId,floorId);
-			if(res == 1)
+			if(res == 1||res==3)
 				System.out.println("查找失败!");
         }
 
@@ -60,7 +60,7 @@ public class FloorManage {
             floor.load();
             floor.change();
             int res = floor.update();
-            if(res==1)
+            if(res==0)
                 System.out.println("修改成功！");
             else
                 System.out.println("修改失败！");

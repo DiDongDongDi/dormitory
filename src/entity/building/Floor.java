@@ -112,7 +112,8 @@ public class Floor {
         //查找失败返回1
         //未找到返回3
         //直接从数据库查找显示即可
-        if(!If_FloorExists(blockId,floorId)){//房间不存在
+        if(!If_FloorExists(blockId,floorId)){//楼层不存在
+            System.out.println("楼层不存在");
             return 3;
         }
         try{
@@ -168,12 +169,13 @@ public class Floor {
     }
     public int update(){
         if(!If_FloorExists(getBuildId(),getFloorId())){//号码不存在!
+            System.out.println("楼层不存在");
             return 2;
         }
         else{
             try{
                 PreparedStatement pstmt = null;
-                String sql="update floor set brokenWaterNum=?,brokenLightNum=? where buildId=? and floorId=? ";//查找的sql
+                String sql="update floors set brokenWaterNum=?,brokenLightNum=? where buildId=? and floorId=? ";//查找的sql
                 pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setInt(1,getBrokenWaterNum());
                 pstmt.setInt(2,getBrokenLightNum());
