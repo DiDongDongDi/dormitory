@@ -2,7 +2,7 @@ package Manage.FloorManage;
 
 import java.util.*;
 import entity.Person.*;
-import entity.*;
+import entity.building.*;
 import DataBase.*;
 
 public class FloorManage {
@@ -43,8 +43,8 @@ public class FloorManage {
             System.out.println("请输入你想操作的楼层号：");
             int floorId = sc.nextInt();
             System.out.println("你想要查询的楼层水机和灯的损坏个数为：");
-//            Floor floor = new Floor();
-//            floor.display(buildId,floorId);
+            Floor floor = new Floor();
+            floor.display(buildId,floorId);
         }
 
         private void repairFloor()  // 进行start里的2操作
@@ -54,13 +54,13 @@ public class FloorManage {
             int buildId = sc.nextInt();
             System.out.println("请输入你想操作的楼层号：");
             int floorId = sc.nextInt();
-          /*  Floor floor = new Floor(buildId,floorId);
+            Floor floor = new Floor(buildId,floorId);
             floor.load();
             floor.change();
             int res = floor.update();
             if(res==1)
                 System.out.println("维修成功！");
             else
-                System.out.println("维修失败！");*/
+                System.out.println("维修失败！");
         }
 }
