@@ -13,8 +13,8 @@ public class FloorManage {
             {
                 Scanner sc = new Scanner(System.in);
                 System.out.println("请选择:");
-                System.out.println("1. 查询楼层水机和灯的损坏状况");
-                System.out.println("2. 修改楼层已损坏的水机和灯");
+                System.out.println("1. 查询楼层状态");
+                System.out.println("2. 更改楼层状态");
                 System.out.println("0. 退出");
                 int op = sc.nextInt();
                 switch (op){
