@@ -167,7 +167,8 @@ public class Block implements implement{
             gender=true;
         else
             gender=false;
-        setBuildId(getBuildId()+1);
+        System.out.println("请输入楼号:");
+        setBuildId(in.nextInt());
         System.out.println("请输入楼层数目:");
         setMaxFloor(in.nextInt());
         System.out.println("请输入每层房间数:");
@@ -185,11 +186,12 @@ public class Block implements implement{
         //传入一个方法检测宿舍楼号在不在数据库中,静态,仅供本类方法内部使用
         try {
             PreparedStatement pstmt = null;
-            String sql="select * from building where buildId=?";
+            String sql="select * from buildings where buildId=?";
             pstmt= DataBase.getConnection().prepareStatement(sql);
             pstmt.setInt(1,OneBuildingId);
             return pstmt.executeQuery().next();
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("数据库查找宿舍楼是否存在异常");
             return false;//异常返回false
         }
@@ -209,7 +211,7 @@ public class Block implements implement{
     }
 
     public int store(){
-        if(!IfBuildingExists(getBuildId())){
+        if(IfBuildingExists(getBuildId())){
             System.out.println("您输入的楼号已经存在,新建失败");
             return 2;
         }
@@ -225,10 +227,10 @@ public class Block implements implement{
             }
             String sql;
             if(ex){
-                sql="INSERT INTO buildings (buildId,gender,maxFloor,maxRoom,supId )VALUES(?,?,?,?)";
+                sql="INSERT INTO buildings (buildId,gender,maxFloor,maxRoom,supId )VALUES(?,?,?,?,?)";
             }
             else{
-                sql="INSERT INTO buildings (buildId,gender,maxFloor,maxRoom )VALUES(?,?,?)";
+                sql="INSERT INTO buildings (buildId,gender,maxFloor,maxRoom )VALUES(?,?,?,?)";
             }
             pstmt= DataBase.getConnection().prepareStatement(sql);
             pstmt.setInt(1,getBuildId());
@@ -313,6 +315,7 @@ public class Block implements implement{
             return 1;
         }
         else if(IfBuildingHasStudent(OneBuildingId)){//数据库有楼号,但是楼内住有人,阻止删除
+            System.out.println("楼内住有人,禁止删除");
             return 1;
         }
         else {//存在楼号,并且有学生,开始删除
@@ -328,6 +331,7 @@ public class Block implements implement{
 
             } catch (SQLException e) {
                 System.out.println("数据库删除student_and_room异常");
+                e.printStackTrace();
                 return 1;//异常返回1
             }
             try {//删除房间
@@ -338,6 +342,19 @@ public class Block implements implement{
                 pstmt.executeUpdate();//实际上不知道这句话的操作结果是什么..
             } catch (SQLException e) {
                 System.out.println("数据库删除房间异常");
+                e.printStackTrace();
+                return 1;//异常返回1
+            }
+            try {//删除楼层
+                PreparedStatement pstmt = null;
+                String sql="delete from floors where buildId= ? ";
+                pstmt= DataBase.getConnection().prepareStatement(sql);
+                pstmt.setInt(1,OneBuildingId);
+
+                pstmt.executeUpdate();//实际上不知道这句话的操作结果是什么..
+            } catch (SQLException e) {
+                System.out.println("数据库删除楼层异常");
+                e.printStackTrace();
                 return 1;//异常返回1
             }
             try {//删除宿舍楼
@@ -347,10 +364,11 @@ public class Block implements implement{
                 pstmt.setInt(1,OneBuildingId);
 
                 if(1==pstmt.executeUpdate()){//成功,楼只有一栋
-                    System.out.println("数据库写入宿舍楼成功");
+                    System.out.println("数据库删除宿舍楼成功");
                 }
             } catch (SQLException e) {
-                System.out.println("数据库添加宿舍楼异常");
+                System.out.println("数据库删除宿舍楼异常");
+                e.printStackTrace();
                 return 1;//异常返回1
             }
             return 0;
@@ -366,10 +384,10 @@ public class Block implements implement{
     }
     public int display(int OneBuildingId){
         if(!IfBuildingExists(OneBuildingId)){//不存在这个楼
-            return 3;
+            return 2;
         }
         try{
-            String sql="select * from building where buildingId=?";//查找的sql
+            String sql="select * from buildings where buildId=?";//查找的sql
             PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
             pstmt.setInt(1,OneBuildingId);
             ResultSet rs=pstmt.executeQuery();//查找宿舍楼,放入ResultSet内
@@ -383,8 +401,8 @@ public class Block implements implement{
             }
             return 0;//正常打印了宿舍楼信息
         }catch (SQLException e) {//查找宿舍楼出现异常
-            System.out.println("尝试显示学生信息:查找学生时出现异常");//此处最后可以注释掉
-            //e.printStackTrace();                 //此处最后可以注释掉
+            System.out.println("尝试显示宿舍楼信息:查找宿舍楼时出现异常");//此处最后可以注释掉
+            e.printStackTrace();                 //此处最后可以注释掉
             return 1;
         }
     }
@@ -395,7 +413,7 @@ public class Block implements implement{
         }
         else{
             try{
-                String sql="select * from building where buildId=?";//查找的sql
+                String sql="select * from buildings where buildId=?";//查找的sql
                 PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setInt(1,num);
                 ResultSet rs=pstmt.executeQuery();//查找宿舍楼,放入ResultSet内
@@ -420,7 +438,7 @@ public class Block implements implement{
         }
         else{
             try{
-                String sql="select * from building where buildId=?";//查找的sql
+                String sql="select * from buildings where buildId=?";//查找的sql
                 PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setInt(1,num);
                 ResultSet rs=pstmt.executeQuery();//查找
@@ -437,7 +455,7 @@ public class Block implements implement{
             }
         }
         try{
-            String sql="update student set supId=?,gender=? where buildId= ?";//查找的sql
+            String sql="update buildings set supId=?,gender=? where buildId= ?";//查找的sql
             PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
             pstmt.setInt(1,getSuperId());
             pstmt.setString(2,getGender());
