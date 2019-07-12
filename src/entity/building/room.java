@@ -1,5 +1,7 @@
 package entity.building;
 
+import Manage.RoomManage.RoomManage;
+
 public class room {
     private int blockId;
     private int floorId;
@@ -17,7 +19,17 @@ public class room {
     public void setBlockId(int blockId) {
         this.blockId = blockId;
     }
-
+    public room(int fI,int rI)
+    {
+        floorId=fI;
+        roomId=rI;
+        bedId=new boolean[4];
+        for(int i=0;i<4;i++)
+        {
+            bedId[i]=false;//初始化，四个床都没有人住进来哪个床哪个true
+        }
+        contain=4;//一个宿舍最多住四个人，住进去一个--，出来一个++
+    }
     public room(int bI, int fI, int rI)
     {
         blockId=bI;
