@@ -1,6 +1,7 @@
 package entity.building;
 
 // import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
+import entity.Person.Superior;
 import implement.*;
 import java.io.*;
 import java.sql.PreparedStatement;
@@ -208,27 +209,63 @@ public class Block implements implement{
     }
 
     public int store(){
-
+        if(!IfBuildingExists(getBuildId())){
+            System.out.println("您输入的楼号已经存在,新建失败");
+            return 2;
+        }
         try {//1.存入宿舍楼
             PreparedStatement pstmt = null;
 
             //DataBase.getConnection().setAutoCommit(false);//关闭自动提交
-
-            String sql="INSERT INTO buildings (supId,gender,maxFloor,maxRoom,supId )VALUES(?,?,?,?,?)";
+            Superior supTemp=new Superior();
+            boolean ex=true;
+            if(supTemp.search(getSuperId())==2){
+                System.out.println("您输入的管理员ID不存在于数据库中,管理员ID将不被写入数据集");
+                ex=false;
+            }
+            String sql;
+            if(ex){
+                sql="INSERT INTO buildings (buildId,gender,maxFloor,maxRoom,supId )VALUES(?,?,?,?)";
+            }
+            else{
+                sql="INSERT INTO buildings (buildId,gender,maxFloor,maxRoom )VALUES(?,?,?)";
+            }
             pstmt= DataBase.getConnection().prepareStatement(sql);
             pstmt.setInt(1,getBuildId());
             pstmt.setString(2,getGender());
             pstmt.setInt(3,getMaxFloor());
             pstmt.setInt(4,getMaxRoom());
+            if(ex){
             pstmt.setInt(5,getSuperId());
+            }
             if(1==pstmt.executeUpdate()){//成功
                 System.out.println("数据库写入宿舍楼成功");
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("数据库添加宿舍楼异常");
             return 1;//异常返回1
         }
         for(int i=1;i<=getMaxFloor();i++){//每层楼循环
+
+            try {//添加一个楼层
+                PreparedStatement pstmt = null;
+
+                String sql="INSERT INTO floors (buildId,floorId )VALUES(?,?)";
+                pstmt= DataBase.getConnection().prepareStatement(sql);
+                pstmt.setInt(1,getBuildId());
+                pstmt.setInt(2,i);
+                //pstmt.setInt(3,j);
+                //pstmt.setInt(4,getMaxRoom());
+                if(1==pstmt.executeUpdate()){//成功
+                    //System.out.println("数据库写入房间成功");
+                }
+            } catch (SQLException e) {
+                System.out.println("数据库添加楼层异常");
+                e.printStackTrace();
+                return 1;//异常返回1
+            }
+
             for(int j=1;j<=getMaxRoom();j++){//一层楼的每个房间循环
                 try {//添加一个房间
                     PreparedStatement pstmt = null;
@@ -244,6 +281,7 @@ public class Block implements implement{
                     }
                 } catch (SQLException e) {
                     System.out.println("数据库添加房间异常");
+                    e.printStackTrace();
                     return 1;//异常返回1
                 }
                 for(int k=1;k<=4;k++){//添加四个床位
@@ -261,6 +299,7 @@ public class Block implements implement{
                         }
                     } catch (SQLException e) {
                         System.out.println("数据库添加床位异常");
+                        e.printStackTrace();
                         return 1;//异常返回1
                     }
                 }
