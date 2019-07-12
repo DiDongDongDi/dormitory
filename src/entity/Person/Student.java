@@ -205,7 +205,7 @@ public class Student extends Person implements implement{
                 return 1;
             }
         } catch (SQLException e) {//删除过程中出现异常
-            System.out.println("删除过程出现异常");//此处最后可以注释掉
+            System.out.println("删除学生失败,请检查学生是否已经退出宿舍");//此处最后可以注释掉
             e.printStackTrace();                 //此处最后可以注释掉
             return 1;
         }
