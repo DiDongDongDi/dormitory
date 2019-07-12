@@ -33,7 +33,7 @@ public class room {
             }
             if(choose==2){
                 while(true){
-                    System.out.println("请输入损坏的饮水机数  ");
+                    System.out.println("请输入新的卫生分数 ");
                     double ch=scanner.nextDouble();
                     if(ch<0){
                         System.out.println("输入错误,请重新输入");

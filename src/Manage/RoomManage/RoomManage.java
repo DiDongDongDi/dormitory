@@ -61,7 +61,7 @@ public class RoomManage {
         System.out.println("请输入你想操作的房间号:");
         int roomId = sc.nextInt();
         room room = new room(buildId,floorId,roomId);
-        //room.load();
+        room.load();
         room.change();
         int res = room.update();
         if(res==2){

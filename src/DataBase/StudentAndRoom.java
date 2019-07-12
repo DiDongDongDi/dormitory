@@ -166,8 +166,9 @@ public class StudentAndRoom {
                     psmst.setInt(4,room);
                     psmst.setInt(5,bed);
                     psmst.setInt(1,student.getStuNo());
-                    psmst.executeUpdate();
-                    return true;
+                    if(1==psmst.executeUpdate())
+                        return true;
+                    return false;
                 }
             }
             else
@@ -244,15 +245,16 @@ public class StudentAndRoom {
                 pstmt.setInt(4,RoomId);
                 pstmt.setInt(5,BedId);
                 pstmt.executeUpdate();
-                String sql4 = "update student_and_room set buildId = ? and floorId = ? and roomId = ? and bedId = ? where stuId = ?";
+                String sql4 = "update student_and_room set stuId = ?  where buildId = ? and floorId = ? and roomId = ? and bedId = ? ";
                 pstmt=DataBase.getConnection().prepareStatement(sql4);
-                pstmt.setInt(1,build);
-                pstmt.setInt(2,floor);
-                pstmt.setInt(3,room);
-                pstmt.setInt(4,bed);
-                pstmt.setInt(5,ID);
+                pstmt.setInt(1,ID);
+                pstmt.setInt(2,build);
+                pstmt.setInt(3,floor);
+                pstmt.setInt(4,room);
+                pstmt.setInt(5,bed);
                 pstmt.executeUpdate();
                 return true;
+
             }
             else
                 return false;

@@ -19,13 +19,13 @@ public class Floor {
 	public void change(){
         Scanner scanner=new Scanner(System.in);
         while(true){
-            System.out.println("请输入您要更新的信息 1.损坏的灯数 2.损坏的饮水机数  ");
+            System.out.println("请输入您要更新的信息 1. 损坏的饮水机数 2.损坏的灯数  ");
             int choose=scanner.nextInt();
-            if(choose==1){
+            if(choose==2){
                 while(true){
                     System.out.println("请输入损坏的灯数 ");
                     int ch=scanner.nextInt();
-                    if(ch>0){
+                    if(ch>=0){
                         setBrokenLightNum(ch);
                         break;
                     }
@@ -33,7 +33,7 @@ public class Floor {
                 }
                 break;
             }
-            if(choose==2){
+            if(choose==1){
                 while(true){
                     System.out.println("请输入损坏的饮水机数  ");
                     int ch=scanner.nextInt();
