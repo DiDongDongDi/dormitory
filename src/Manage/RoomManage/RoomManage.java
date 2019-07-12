@@ -41,7 +41,14 @@ public class RoomManage {
         System.out.println("请输入你想操作的房间号:");
         int roomId = sc.nextInt();
         room room = new room();
-        room.display(buildId,floorId,roomId);
+        int res=room.display(buildId,floorId,roomId);
+        if(1==res){
+            System.out.println("查找出现异常");
+        }
+        if(3==res){
+            System.out.println("您输入的房间不存在");
+        }
+
     }
 
     private void modifiRoom() //实现 start 2 操作
@@ -54,10 +61,13 @@ public class RoomManage {
         System.out.println("请输入你想操作的房间号:");
         int roomId = sc.nextInt();
         room room = new room(buildId,floorId,roomId);
-        room.load();
+        //room.load();
         room.change();
         int res = room.update();
-        if(res==1)
+        if(res==2){
+            System.out.println("您输入的房间不存在");
+        }
+        if(res==0)
             System.out.println("修改成功！");
         else
             System.out.println("修改失败！");
