@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import DataBase.*;
+import java.util.Scanner;
 
 public class Floor {
     private int buildId;
@@ -16,7 +17,38 @@ public class Floor {
     }
 
 	public void change(){
-		
+        Scanner scanner=new Scanner(System.in);
+        while(true){
+            System.out.println("请输入您要更新的信息 1.损坏的灯数 2.损坏的饮水机数  ");
+            int choose=scanner.nextInt();
+            if(choose==1){
+                while(true){
+                    System.out.println("请输入损坏的灯数 ");
+                    int ch=scanner.nextInt();
+                    if(ch>0){
+                        setBrokenLightNum(ch);
+                        break;
+                    }
+                    System.out.println("输入错误,请重新输入");
+                }
+                break;
+            }
+            if(choose==2){
+                while(true){
+                    System.out.println("请输入损坏的饮水机数  ");
+                    int ch=scanner.nextInt();
+                    if(ch<0){
+                        System.out.println("输入错误,请重新输入");
+                    }
+                    else{
+                        setBrokenWaterNum(ch);
+                        break;
+                    }
+                }
+                break;
+            }
+
+        }
 	}
 
     public Floor(int bI,int fI)
