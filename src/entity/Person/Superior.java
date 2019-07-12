@@ -73,25 +73,32 @@ public class Superior extends Person implements implement{
     }
     public void change()
     {
-        System.out.println("请选择修改的选项 1.姓名 2.性别");
-        Scanner in = new Scanner(System.in);
-        switch (in.nextInt())
-        {
-            case 1:
-                System.out.println("请输入姓名");
-                this.setName(in.next());
-                break;
-            case 2:
-                System.out.println("请输入性别 1.male 2.female");
-                if(in.nextInt()==1)
-                    setSex(true);
-                else
-                    setSex(false);
-                break;
-            default:
-                System.out.println("输入错误");
-                break;
-        }
+		while(true){
+			System.out.println("请选择:\n1. 姓名\n2. 性别\n3. 电话号码\n0. 退出");
+			Scanner in = new Scanner(System.in);
+			switch (in.nextInt())
+			{
+				case 1:
+					System.out.println("请输入职工姓名:");
+					this.setName(in.next());
+					break;
+				case 2:
+					System.out.println("请输入职工性别:\n1. 男\n2. 女");
+					if(in.nextInt()==1)
+						setSex(true);
+					else
+						setSex(false);
+					break;
+				case 3:
+					System.out.println("请输入职工电话号码:");
+					setPhoneNum(in.next());
+					break;
+				case 0:
+					return;
+				default:
+					System.out.println("您的输入有误, 请重新输入!");
+			}	
+		}
     }
     private static boolean If_SuperNumberExists(int num){ //给定工号判断是否存在于数据库,静态,仅供操作数据库的方法内部使用
         try{
@@ -154,7 +161,7 @@ public class Superior extends Person implements implement{
                 String sql="select * from super where supId=?";//查找的sql
                 PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setInt(1,num);
-                System.out.println("查找管理员");
+                // System.out.println("查找管理员");
                 ResultSet rs=pstmt.executeQuery();//查找管理员,放入ResultSet内
                 while(rs.next()){//打印管理员信息
                     System.out.println(
@@ -202,7 +209,7 @@ public class Superior extends Person implements implement{
         try{
             if(If_SuperNumberExists(num)){//找到了管理员
 
-                display(num);
+                // display(num);
 
                 String sql="delete from super where supId=?";//删除的sql
                 PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);

@@ -212,7 +212,7 @@ public class Block implements implement{
 
     public int store(){
         if(IfBuildingExists(getBuildId())){
-            System.out.println("您输入的楼号已经存在,新建失败");
+            System.out.println("您输入的楼号已经存在, 新建宿舍楼失败!");
             return 2;
         }
         try {//1.存入宿舍楼
@@ -222,7 +222,7 @@ public class Block implements implement{
             Superior supTemp=new Superior();
             boolean ex=true;
             if(supTemp.search(getSuperId())==2){
-                System.out.println("您输入的管理员ID不存在于数据库中,管理员ID将不被写入数据集");
+                System.out.println("无法找到您输入的管理员工号, 该工号将不被记录!");
                 ex=false;
             }
             String sql;
@@ -241,7 +241,7 @@ public class Block implements implement{
             pstmt.setInt(5,getSuperId());
             }
             if(1==pstmt.executeUpdate()){//成功
-                System.out.println("数据库写入宿舍楼成功");
+                System.out.println("正在建楼中, 请稍后...");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -364,7 +364,7 @@ public class Block implements implement{
                 pstmt.setInt(1,OneBuildingId);
 
                 if(1==pstmt.executeUpdate()){//成功,楼只有一栋
-                    System.out.println("数据库删除宿舍楼成功");
+                    System.out.println("正在拆楼中, 请稍后...");
                 }
             } catch (SQLException e) {
                 System.out.println("数据库删除宿舍楼异常");
@@ -475,8 +475,8 @@ public class Block implements implement{
     public void show()
     {
         // System.out.println(buildId+"号宿舍楼信息如下：");
-        System.out.println("性别\t\t楼层数\t\t每层房间数\t\t管理员工号");
-        System.out.println(getSex()+"\t\t"+maxFloor+"\t\t"+maxRoom+"\t\t"+superId);
+        System.out.println("楼号\t\t性别\t\t楼层数\t\t每层房间数\t\t管理员工号");
+        System.out.println(getBuildId()+"\t\t"+getSex()+"\t\t"+maxFloor+"\t\t"+maxRoom+"\t\t"+superId);
 
     }
 }

@@ -11,37 +11,39 @@ public class BuildingManage{
 	}
 
 	public void start(){
-		System.out.println("请选择:");
-		System.out.println("1. 新建宿舍楼");
-		System.out.println("2. 拆除宿舍楼");
-		System.out.println("3. 修改宿舍楼信息");
-		System.out.println("4. 查询宿舍楼信息");
-		System.out.println("5. 宿舍楼消息管理");
-		System.out.println("0. 退出");
+		while(true){
+			System.out.println("请选择:");
+			System.out.println("1. 新建宿舍楼");
+			System.out.println("2. 拆除宿舍楼");
+			System.out.println("3. 修改宿舍楼信息");
+			System.out.println("4. 查询宿舍楼信息");
+			System.out.println("5. 宿舍楼消息管理");
+			System.out.println("0. 退出");
 
-		Scanner sc = new Scanner(System.in);
-		int op = sc.nextInt();
-		switch(op){
-			case 1:
-				addBuilding();
-				break;
-			case 2:
-				deleteBuilding();
-				break;
-			case 3:
-				changeBuilding();
-				break;
-			case 4:
-				searchBuilding();
-				break;
-			case 5:
-				messageManage();
-				break;
-			case 0:
-				System.out.println("成功退出宿舍楼管理!");
-				return;
-			default:
-				System.out.println("您的输入有误, 请重新输入!");
+			Scanner sc = new Scanner(System.in);
+			int op = sc.nextInt();
+			switch(op){
+				case 1:
+					addBuilding();
+					break;
+				case 2:
+					deleteBuilding();
+					break;
+				case 3:
+					changeBuilding();
+					break;
+				case 4:
+					searchBuilding();
+					break;
+				case 5:
+					messageManage();
+					break;
+				case 0:
+					System.out.println("成功退出宿舍楼管理!");
+					return;
+				default:
+					System.out.println("您的输入有误, 请重新输入!");
+			}	
 		}
 	}
 
