@@ -122,7 +122,7 @@ public class Superior extends Person implements implement{
             pstmt.setInt(1,this.getSupId());
             pstmt.setString(2,this.getName());
             pstmt.setString(3,this.getSex());
-            pstmt.setInt(4,this.getPhoneNum());
+            pstmt.setString(4,this.getPhoneNum());
             pstmt.executeUpdate();
 
 
@@ -183,7 +183,7 @@ public class Superior extends Person implements implement{
                 rs.next();
                 setName(rs.getString(2));
                 setSex(rs.getString(3).equals("男"));
-                setPhoneNum(rs.getInt(4));
+                setPhoneNum(rs.getString(4));
 
 
                 return 0;//修改成功
@@ -231,7 +231,7 @@ public class Superior extends Person implements implement{
                 PreparedStatement pstmt=DataBase.getConnection().prepareStatement(sql);
                 pstmt.setString(1,getName());
                 pstmt.setString(2,getSex());
-                pstmt.setInt(3,getPhoneNum());
+                pstmt.setString(3,getPhoneNum());
                 pstmt.setInt(4,getSupId());
                 if (1==pstmt.executeUpdate()){
                     return 0;
