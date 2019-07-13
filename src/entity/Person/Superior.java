@@ -111,7 +111,7 @@ public class Superior extends Person implements implement{
             return rs.next();//是否找到管理员?(boolean)
 
         }catch (SQLException e) {
-            System.out.println("查找工号是否存在过程出现异常");//此处最后可以注释掉
+            System.out.println("查找工号是否存在异常!");//此处最后可以注释掉
             //e.printStackTrace();                 //此处最后可以注释掉
             return false;
         }
@@ -134,7 +134,7 @@ public class Superior extends Person implements implement{
 
 
         } catch (SQLException e) {
-            System.out.println("管理员store时出现异常");
+            System.out.println("存储职工信息异常!");
             e.printStackTrace();
             return 1;
 
@@ -173,7 +173,7 @@ public class Superior extends Person implements implement{
                     }
                     return 0;//正常打印了管理员信息
                 }catch (SQLException e) {//删除过程中出现异常
-                    System.out.println("尝试显示管理员信息:查找管理员时出现异常");//此处最后可以注释掉
+                    System.out.println("尝试显示职工信息...\n查找职工信息异常!");//此处最后可以注释掉
                     //e.printStackTrace();                 //此处最后可以注释掉
                     return 1;
                 }
@@ -198,7 +198,7 @@ public class Superior extends Person implements implement{
 
                 return 0;//修改成功
             }catch (SQLException e) {//load过程中出现异常
-                System.out.println("load管理员时出现异常");//此处最后可以注释掉
+                System.out.println("加载职工信息异常!");//此处最后可以注释掉
                 e.printStackTrace();                 //此处最后可以注释掉
                 return 1;
             }
@@ -218,14 +218,14 @@ public class Superior extends Person implements implement{
                 if(1==pstmt.executeUpdate()){//删除一个,返回0
                     return 0;
                 }
-                System.out.println("搜索到好几个,这句话理论上不应该被执行");
+                System.out.println("恭喜你发现彩蛋了, 我是DiDong.");
                 return 1;
             }
             else{ //未找到管理员
                 return 1;
             }
         } catch (SQLException e) {//删除过程中出现异常
-            System.out.println("删除管理员失败,请检查管理员是否有仍在管理的宿舍楼");//此处最后可以注释掉
+            System.out.println("删除职工失败, 请检查该职工是否管理宿舍楼!");//此处最后可以注释掉
             e.printStackTrace();                 //此处最后可以注释掉
             return 1;
         }
@@ -252,7 +252,7 @@ public class Superior extends Person implements implement{
 
 
             }catch (SQLException e) {//update过程中出现异常
-                System.out.println("update管理员时出现异常");//此处最后可以注释掉
+                System.out.println("更新管理员信息异常!");//此处最后可以注释掉
                 e.printStackTrace();                 //此处最后可以注释掉
                 return 1;
             }

@@ -19,26 +19,26 @@ public class Floor {
 	public void change(){
         Scanner scanner=new Scanner(System.in);
         while(true){
-            System.out.println("请输入您要更新的信息 1. 损坏的饮水机数 2.损坏的灯数  ");
+            System.out.println("请输入您要更新的信息:\n1. 损坏水机数\n2. 损坏灯数");
             int choose=scanner.nextInt();
             if(choose==2){
                 while(true){
-                    System.out.println("请输入损坏的灯数 ");
+                    System.out.println("请输入损坏的灯数:");
                     int ch=scanner.nextInt();
                     if(ch>=0){
                         setBrokenLightNum(ch);
                         break;
                     }
-                    System.out.println("输入错误,请重新输入");
+                    System.out.println("您的输入有误, 请重新输入!");
                 }
                 break;
             }
             if(choose==1){
                 while(true){
-                    System.out.println("请输入损坏的饮水机数  ");
+                    System.out.println("请输入损坏的水机数:");
                     int ch=scanner.nextInt();
                     if(ch<0){
-                        System.out.println("输入错误,请重新输入");
+                        System.out.println("您的输入有误, 请重新输入!");
                     }
                     else{
                         setBrokenWaterNum(ch);
@@ -102,7 +102,7 @@ public class Floor {
             return rs.next();//是否找到floor ?(boolean)
 
         }catch (SQLException e) {
-            System.out.println("查找楼层是否存在过程出现异常");//此处最后可以注释掉
+            System.out.println("查找楼层是否存在异常!");//此处最后可以注释掉
             //e.printStackTrace();                 //此处最后可以注释掉
             return false;
         }
@@ -113,7 +113,7 @@ public class Floor {
         //未找到返回3
         //直接从数据库查找显示即可
         if(!If_FloorExists(blockId,floorId)){//楼层不存在
-            System.out.println("楼层不存在");
+            System.out.println("该楼层不存在!");
             return 3;
         }
         try{
@@ -135,7 +135,7 @@ public class Floor {
             }
             return 0;//正常打印了floor信息
         }catch (SQLException e) {//过程中出现异常
-            System.out.println("尝试显示楼层信息:查找楼层时出现异常");//此处最后可以注释掉
+            System.out.println("尝试显示楼层信息...\n查找楼层异常!");//此处最后可以注释掉
             //e.printStackTrace();                 //此处最后可以注释掉
             return 1;
         }
@@ -161,7 +161,7 @@ public class Floor {
 
                 return 0;//load successfully
             }catch (SQLException e) {//load floor过程中出现异常
-                System.out.println("load floor时出现异常");//此处最后可以注释掉
+                System.out.println("加载楼层信息异常!");//此处最后可以注释掉
                 e.printStackTrace();                 //此处最后可以注释掉
                 return 1;
             }
@@ -169,7 +169,7 @@ public class Floor {
     }
     public int update(){
         if(!If_FloorExists(getBuildId(),getFloorId())){//号码不存在!
-            System.out.println("楼层不存在");
+            System.out.println("该楼层不存在!");
             return 2;
         }
         else{
@@ -186,7 +186,7 @@ public class Floor {
 
                 return 0;//update successfully
             }catch (SQLException e) {//update floor过程中出现异常
-                System.out.println("update floor时出现异常");//此处最后可以注释掉
+                System.out.println("加载楼层信息异常!");//此处最后可以注释掉
                 e.printStackTrace();                 //此处最后可以注释掉
                 return 1;
             }

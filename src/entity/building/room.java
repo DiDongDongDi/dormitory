@@ -20,11 +20,11 @@ public class room {
 	public void change(){
         Scanner scanner=new Scanner(System.in);
         while(true){
-            System.out.println("请输入您要更新的信息 1.电费余量 2.卫生分数  ");
+            System.out.println("请输入您要更新的信息:\n1. 电费余量\n2. 卫生分数");
             int choose=scanner.nextInt();
             if(choose==1){
                 while(true){
-                    System.out.println("请输入新的电费余量 ");
+                    System.out.println("请输入新的电费余量:");
                     double ch=scanner.nextDouble();
                     setElecBillBala(ch);
                     break;
@@ -33,10 +33,10 @@ public class room {
             }
             if(choose==2){
                 while(true){
-                    System.out.println("请输入新的卫生分数 ");
+                    System.out.println("请输入新的卫生分数:");
                     double ch=scanner.nextDouble();
                     if(ch<0){
-                        System.out.println("输入错误,请重新输入");
+                        System.out.println("您的输入有误, 请重新输入!");
                     }
                     else{
                         setHealScore(ch);
@@ -131,12 +131,12 @@ public class room {
     {
         if(bedId[bedid]==true)
         {
-            System.out.println("这个床位已经有人了");
+            System.out.println("该床位已占用!");
             return;
         }
         else
         bedId[bedid]=true;
-        System.out.println("入住成功！");
+        System.out.println("入住成功!");
     }
 
     private static boolean If_roomExists(int blockId,int floorId,int roomId){ //给定房间信息判断是否存在于数据库,静态,仅供操作数据库的方法内部使用
@@ -152,7 +152,7 @@ public class room {
             return rs.next();//是否找到room ?(boolean)
 
         }catch (SQLException e) {
-            System.out.println("查找房间是否存在过程出现异常");//此处最后可以注释掉
+            System.out.println("查找房间是否存在异常!");//此处最后可以注释掉
             //e.printStackTrace();                 //此处最后可以注释掉
             return false;
         }
@@ -183,7 +183,7 @@ public class room {
             }
             return 0;//正常打印了学生信息
         }catch (SQLException e) {//过程中出现异常
-            System.out.println("尝试显示学生信息:查找学生时出现异常");//此处最后可以注释掉
+            System.out.println("尝试显示学生信息...\n查找学生异常!");//此处最后可以注释掉
             //e.printStackTrace();                 //此处最后可以注释掉
             return 1;
         }
@@ -210,7 +210,7 @@ public class room {
 
                 return 0;//load successfully
             }catch (SQLException e) {//load room过程中出现异常
-                System.out.println("load房间时出现异常");//此处最后可以注释掉
+                System.out.println("加载房间信息异常!");//此处最后可以注释掉
                 e.printStackTrace();                 //此处最后可以注释掉
                 return 1;
             }
@@ -235,7 +235,7 @@ public class room {
 
                 return 0;//update successfully
             }catch (SQLException e) {//load room过程中出现异常
-                System.out.println("update房间时出现异常");//此处最后可以注释掉
+                System.out.println("更新房间信息异常!");//此处最后可以注释掉
                 e.printStackTrace();                 //此处最后可以注释掉
                 return 1;
             }

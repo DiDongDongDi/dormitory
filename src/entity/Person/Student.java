@@ -65,7 +65,7 @@ public class Student extends Person implements implement{
             return rs.next();//是否找到学生?(boolean)
 
         }catch (SQLException e) {
-            System.out.println("查找学号是否存在过程出现异常");//此处最后可以注释掉
+            System.out.println("查找学号是否存在异常!");//此处最后可以注释掉
             //e.printStackTrace();                 //此处最后可以注释掉
             return false;
         }
@@ -147,14 +147,14 @@ public class Student extends Person implements implement{
                     }
                     return 0;//正常打印了学生信息
                 }catch (SQLException e) {//删除过程中出现异常
-                    System.out.println("尝试显示学生信息:查找学生时出现异常");//此处最后可以注释掉
+                    System.out.println("尝试显示学生信息...\n查找学生时出现异常!");//此处最后可以注释掉
                     //e.printStackTrace();                 //此处最后可以注释掉
                     return 1;
                 }
             }
 
         }catch (SQLException e) {
-            System.out.println("尝试显示学生信息:查找学生时出现异常_2");//此处最后可以注释掉
+            System.out.println("尝试显示学生信息...\n查找学生时出现异常2!");//此处最后可以注释掉
             //e.printStackTrace();                 //此处最后可以注释掉
             return 1;
         }
@@ -178,7 +178,7 @@ public class Student extends Person implements implement{
 
                 return 0;//修改成功
             }catch (SQLException e) {//删除过程中出现异常
-                System.out.println("load学生时出现异常");//此处最后可以注释掉
+                System.out.println("加载学生信息异常!");//此处最后可以注释掉
                 e.printStackTrace();                 //此处最后可以注释掉
                 return 1;
             }
@@ -197,14 +197,14 @@ public class Student extends Person implements implement{
                 if(1==pstmt.executeUpdate()){//删除一个,返回0
                     return 0;
                 }
-                System.out.println("搜索到好几个,这句话理论上不应该被执行");
+                System.out.println("恭喜你找到彩蛋了, 我是DiDong.");
                 return 1;
             }
             else{ //未找到学生
                 return 1;
             }
         } catch (SQLException e) {//删除过程中出现异常
-            System.out.println("删除学生失败,请检查学生是否已经退出宿舍");//此处最后可以注释掉
+            System.out.println("删除学生失败!\n请检查学生是否已经退出宿舍!");//此处最后可以注释掉
             e.printStackTrace();                 //此处最后可以注释掉
             return 1;
         }
@@ -231,7 +231,7 @@ public class Student extends Person implements implement{
 
 
             }catch (SQLException e) {//删除过程中出现异常
-                System.out.println("load学生时出现异常");//此处最后可以注释掉
+                System.out.println("加载学生信息异常!");//此处最后可以注释掉
                 e.printStackTrace();                 //此处最后可以注释掉
                 return 1;
             }

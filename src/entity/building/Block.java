@@ -65,11 +65,11 @@ public class Block implements implement{
         }
 	}
 	public void postMessage(){
-        System.out.println("请输入要发布的新闻");
+        System.out.println("请输入要发布的消息:");
         Scanner in=new Scanner(System.in);
         String post=in.next();
         WritePostFile(post);
-        System.out.println("消息发布成功");
+        System.out.println("消息发布成功!");
 	}
 	public void showHistoryMessage(){
 		loadPostFile();
@@ -135,11 +135,11 @@ public class Block implements implement{
         }
         catch (IOException e)
         {
-            System.out.println("写入失败！");
+            System.out.println("写入失败!");
         }
         catch (Exception e)
         {
-            System.out.println("未知错误！");
+            System.out.println("未知错误!");
         }
     }
     public void WriteProblemFile(String str)
@@ -158,16 +158,16 @@ public class Block implements implement{
         }
         catch (IOException e)
         {
-            System.out.println("写入失败！");
+            System.out.println("写入失败!");
         }
         catch (Exception e)
         {
-            System.out.println("未知错误！");
+            System.out.println("未知错误!");
         }
     }
     public void loadPostFile()
     {
-        System.out.println(getBuildId()+"号大楼公告板如下");
+        System.out.println(getBuildId()+"号宿舍楼历史消息为:");
         try{
             FileReader fr=new FileReader("Post"+getBuildId()+".txt");
             BufferedReader br=new BufferedReader(fr);
@@ -179,12 +179,12 @@ public class Block implements implement{
 
         catch (Exception e)
         {
-            System.out.println("未知错误！");
+            System.out.println("未知错误!");
         }
     }
     public void loadProblemFile()
     {
-        System.out.println(getBuildId()+"号大楼问题板如下");
+        System.out.println(getBuildId()+"号宿舍楼消息为:");
         try{
         FileReader fr=new FileReader(problemFile);
         BufferedReader br=new BufferedReader(fr);
@@ -196,7 +196,7 @@ public class Block implements implement{
 
         catch (Exception e)
         {
-            System.out.println("未知错误！");
+            System.out.println("未知错误!");
         }
     }
    public void create_building()//自动创建大楼,但是要在factory里面盖楼
@@ -232,7 +232,7 @@ public class Block implements implement{
             return pstmt.executeQuery().next();
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("数据库查找宿舍楼是否存在异常");
+            System.out.println("数据库查找宿舍楼异常!");
             return false;//异常返回false
         }
     }
@@ -245,7 +245,7 @@ public class Block implements implement{
             pstmt.setInt(1,OneBuildingId);
             return pstmt.executeQuery().next();
         } catch (SQLException e) {
-            System.out.println("数据库查找宿舍楼是否有学生居住出现异常");
+            System.out.println("数据库查找宿舍楼是否有学生居住异常!");
             return false;//异常返回false
         }
     }
@@ -281,11 +281,11 @@ public class Block implements implement{
             pstmt.setInt(5,getSuperId());
             }
             if(1==pstmt.executeUpdate()){//成功
-                System.out.println("正在建楼中, 请稍后...");
+                System.out.println("正在建楼中, 请稍候...");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("数据库添加宿舍楼异常");
+            System.out.println("数据库添加宿舍楼异常!");
             return 1;//异常返回1
         }
         for(int i=1;i<=getMaxFloor();i++){//每层楼循环
@@ -303,7 +303,7 @@ public class Block implements implement{
                     //System.out.println("数据库写入房间成功");
                 }
             } catch (SQLException e) {
-                System.out.println("数据库添加楼层异常");
+                System.out.println("数据库添加楼层异常!");
                 e.printStackTrace();
                 return 1;//异常返回1
             }
@@ -322,7 +322,7 @@ public class Block implements implement{
                         //System.out.println("数据库写入房间成功");
                     }
                 } catch (SQLException e) {
-                    System.out.println("数据库添加房间异常");
+                    System.out.println("数据库添加房间异常!");
                     e.printStackTrace();
                     return 1;//异常返回1
                 }
@@ -340,7 +340,7 @@ public class Block implements implement{
                             //
                         }
                     } catch (SQLException e) {
-                        System.out.println("数据库添加床位异常");
+                        System.out.println("数据库添加床位异常!");
                         e.printStackTrace();
                         return 1;//异常返回1
                     }
@@ -355,7 +355,7 @@ public class Block implements implement{
             return 1;
         }
         else if(IfBuildingHasStudent(OneBuildingId)){//数据库有楼号,但是楼内住有人,阻止删除
-            System.out.println("楼内住有人,禁止删除");
+            System.out.println("楼内住有人, 禁止拆除!");
             return 1;
         }
         else {//存在楼号,并且有学生,开始删除
@@ -370,7 +370,7 @@ public class Block implements implement{
 
 
             } catch (SQLException e) {
-                System.out.println("数据库删除student_and_room异常");
+                System.out.println("数据库删除student_and_room表异常!");
                 e.printStackTrace();
                 return 1;//异常返回1
             }
@@ -381,7 +381,7 @@ public class Block implements implement{
                 pstmt.setInt(1,OneBuildingId);
                 pstmt.executeUpdate();//实际上不知道这句话的操作结果是什么..
             } catch (SQLException e) {
-                System.out.println("数据库删除房间异常");
+                System.out.println("数据库删除房间异常!");
                 e.printStackTrace();
                 return 1;//异常返回1
             }
@@ -393,7 +393,7 @@ public class Block implements implement{
 
                 pstmt.executeUpdate();//实际上不知道这句话的操作结果是什么..
             } catch (SQLException e) {
-                System.out.println("数据库删除楼层异常");
+                System.out.println("数据库删除楼层异常!");
                 e.printStackTrace();
                 return 1;//异常返回1
             }
@@ -404,10 +404,10 @@ public class Block implements implement{
                 pstmt.setInt(1,OneBuildingId);
 
                 if(1==pstmt.executeUpdate()){//成功,楼只有一栋
-                    System.out.println("正在拆楼中, 请稍后...");
+                    System.out.println("正在拆楼中, 请稍候...");
                 }
             } catch (SQLException e) {
-                System.out.println("数据库删除宿舍楼异常");
+                System.out.println("数据库删除宿舍楼异常!");
                 e.printStackTrace();
                 return 1;//异常返回1
             }
@@ -442,7 +442,7 @@ public class Block implements implement{
             }
             return 0;//正常打印了宿舍楼信息
         }catch (SQLException e) {//查找宿舍楼出现异常
-            System.out.println("尝试显示宿舍楼信息:查找宿舍楼时出现异常");//此处最后可以注释掉
+            System.out.println("尝试显示宿舍楼信息...\n查找宿舍楼时出现异常!");//此处最后可以注释掉
             e.printStackTrace();                 //此处最后可以注释掉
             return 1;
         }
@@ -465,7 +465,7 @@ public class Block implements implement{
                 setMaxRoom(rs.getInt(5));
                 return 0;//load完毕
             }catch (SQLException e) {//load宿舍楼过程中出现异常
-                System.out.println("load宿舍楼时出现异常");//此处最后可以注释掉
+                System.out.println("加载宿舍楼信息异常!");//此处最后可以注释掉
                 e.printStackTrace();                 //此处最后可以注释掉
                 return 1;
             }
@@ -490,7 +490,7 @@ public class Block implements implement{
                     return 3;
                 }
             }catch (SQLException e) {
-                System.out.println("update宿舍楼检查更新条件时出现异常");//此处最后可以注释掉
+                System.out.println("更新宿舍楼, 检查更新条件时异常!");//此处最后可以注释掉
                 e.printStackTrace();                 //此处最后可以注释掉
                 return 1;
             }
@@ -525,7 +525,7 @@ public class Block implements implement{
                 return 1;
             }
         }catch (SQLException e) {//更新过程中出现异常
-            System.out.println("update,检测完毕,更新宿舍楼时出现异常");//此处最后可以注释掉
+            System.out.println("更新检测完毕, 更新宿舍楼时出现异常!");//此处最后可以注释掉
             e.printStackTrace();                 //此处最后可以注释掉
             return 1;
         }

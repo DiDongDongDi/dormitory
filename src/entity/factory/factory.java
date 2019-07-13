@@ -14,7 +14,7 @@ public class factory {
                     productSuper pro=new productSuper();
                     return pro.produce();
                 default:
-                    System.out.println("输入错误");
+                    System.out.println("您的输入有误!");
                     return null;
             }
         }

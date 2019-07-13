@@ -10,7 +10,7 @@ public class StudentAndRoom {
             pstmt = DataBase.getConnection().prepareStatement(sql);
             pstmt.setInt(1,StuID);
             ResultSet rs =pstmt.executeQuery();
-            System.out.println("ID\t\t\tBuildId\t\t\tFloorId\t\t\tRoomId\t\t\tBedId");
+            System.out.println("学号\t\t楼号\t\t楼层号\t\t房间号\t\t床位号");
             if(rs.next()){
                 rs.previous();
                 while (rs.next())
@@ -24,7 +24,7 @@ public class StudentAndRoom {
                 }
             }
             else
-                System.out.println("      "); //输出空格表示没有查到
+                System.out.println("        "); //输出空格表示没有查到
         }catch (SQLException e)
         {
             e.printStackTrace();
@@ -42,18 +42,18 @@ public class StudentAndRoom {
             pstmt.setInt(2,FloorId);
             pstmt.setInt(3,RoomId);
             ResultSet rs =pstmt.executeQuery();
-            System.out.println("ID\t\t\tBedId");
+            System.out.println("学号\t\t床位");
             if(rs.next()) {
                 rs.previous();
                 while (rs.next()) {
                     int stuId = rs.getInt("stuId");
                     int BedId = rs.getInt("bedId");
-                    System.out.println(stuId==0?"     ":stuId + "\t\t\t" + BedId);//输出信息
+                    System.out.println(stuId==0?"     ":stuId + "\t\t" + BedId);//输出信息
                     //System.out.println("dsa");
                 }
             }
             else
-                System.out.println("      "); //输出空格表示没有查到
+                System.out.println("        "); //输出空格表示没有查到
         }catch (SQLException e)
         {
             e.printStackTrace();
@@ -73,7 +73,7 @@ public class StudentAndRoom {
             pstmt.setInt(3,RoomId);
             pstmt.setInt(4,BedId);
             ResultSet rs =pstmt.executeQuery();
-            System.out.println("ID ");
+            System.out.println("学号");
             if(rs.next()) {
                 rs.previous();
                 while (rs.next()) {
@@ -82,7 +82,7 @@ public class StudentAndRoom {
                 }
             }
             else
-                System.out.println("      "); //输出空格表示没有查到
+                System.out.println("        "); //输出空格表示没有查到
         }catch (SQLException e)
         {
             e.printStackTrace();

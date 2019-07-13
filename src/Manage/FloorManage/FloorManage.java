@@ -42,7 +42,7 @@ public class FloorManage {
             int buildId = sc.nextInt();
             System.out.println("请输入宿舍楼层号:");
             int floorId = sc.nextInt();
-            System.out.println("该楼层水机和灯的损坏状况为：");
+            System.out.println("该楼层水机和灯的损坏状况为:");
             Floor floor = new Floor();
             int res = floor.display(buildId,floorId);
 			if(res == 1||res==3)

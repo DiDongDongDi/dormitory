@@ -81,7 +81,7 @@ public class StudentManage{
 		System.out.println("请输入需要删除的学生信息的学号:");
 		Scanner sc = new Scanner(System.in);
 		int stuID = sc.nextInt();
-		if(stuID < 0){
+		if(stuID <= 0){
 			System.out.println("您的输入有误!");
 			return;
 		}
@@ -137,7 +137,7 @@ public class StudentManage{
 		System.out.println("请输入需要更改的学生信息的学号:");
 		Scanner sc = new Scanner(System.in);
 		int stuID = sc.nextInt();
-		if(stuID < 0){
+		if(stuID <= 0){
 			System.out.println("您的输入有误!");
 			return;
 		}
@@ -203,7 +203,7 @@ public class StudentManage{
 		System.out.println("请输入需要查找的学生信息的学号:");
 		Scanner sc = new Scanner(System.in);
 		int stuID = sc.nextInt();
-		if(stuID < 0){
+		if(stuID <= 0){
 			System.out.println("您的输入有误!");
 			return;
 		}

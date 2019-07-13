@@ -9,7 +9,7 @@ public class BuildingStatus {
 			pstmt = DataBase.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, buildId);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println("BuildId\t\t\tFloorId\t\t\tBrokenwaterNum\t\t\tBrokenLightNum");
+			System.out.println("楼号\t\t楼层号\t\t水机损坏数\t\t灯损坏数");
 			if (rs.next()) {
 				rs.previous();
 				while (rs.next()) {
@@ -17,12 +17,12 @@ public class BuildingStatus {
 					int FloorId = rs.getInt("floorId");
 					int BrokenwaterNum = rs.getInt("brokenWaterNum");
 					int BrokenLightNum = rs.getInt("brokenLightNum");
-					System.out.println(BuildId + "\t\t\t" + FloorId + "\t\t\t" + BrokenwaterNum + "\t\t\t" + BrokenLightNum);//输出信息
+					System.out.println(BuildId + "\t\t" + FloorId + "\t\t" + BrokenwaterNum + "\t\t" + BrokenLightNum);//输出信息
 				}
 			} else
-				System.out.println("      "); //输出空格表示没有查到
+				System.out.println("        "); //输出空格表示没有查到
 		} catch (SQLException e) {
-			System.out.println("查询异常！");
+			System.out.println("查询异常!");
 		}
 	}
 
@@ -33,7 +33,7 @@ public class BuildingStatus {
 			pstmt = DataBase.getConnection().prepareStatement(sql);
 			pstmt.setInt(1, buildId);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println("BuildId\t\t\tFloorId\t\t\telecBill\t\t\thealScore");
+			System.out.println("楼号\t\t楼层号\t\t电费余额\t\t卫生分数");
 			if (rs.next()) {
 				rs.previous();
 				while (rs.next()) {
@@ -42,12 +42,12 @@ public class BuildingStatus {
 					int RoomId = rs.getInt("roomId");
 					double BrokenwaterNum = rs.getDouble("elecBillBala");
 					double BrokenLightNum = rs.getDouble("healScore");
-					System.out.println(BuildId + "\t\t\t" + FloorId + "\t\t\t" +RoomId+"\t\t\t"+ BrokenwaterNum + "\t\t\t" + BrokenLightNum);//输出信息
+					System.out.println(BuildId + "\t\t" + FloorId + "\t\t" +RoomId+"\t\t"+ BrokenwaterNum + "\t\t" + BrokenLightNum);//输出信息
 				}
 			} else
-				System.out.println("      "); //输出空格表示没有查到
+				System.out.println("        "); //输出空格表示没有查到
 		} catch (SQLException e) {
-			System.out.println("查询异常！");
+			System.out.println("查询异常!");
 		}
 	}
 	public static String getGender(int buildId)
@@ -65,7 +65,7 @@ public class BuildingStatus {
 				return gender;
 		}catch (SQLException e)
 		{
-			System.out.println("查询异常");
+			System.out.println("查询异常!");
 			return " ";
 		}
 	}

@@ -45,7 +45,7 @@ public class Search{
 		System.out.println("请输入需要查找的学号:");
 		Scanner sc = new Scanner(System.in);
 		int stuID = sc.nextInt();
-		if(stuID < 0){
+		if(stuID <= 0){
 			System.out.println("您的输入有误!");
 			return;
 		}
