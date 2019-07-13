@@ -65,10 +65,14 @@ public class Block implements implement{
         }
 	}
 	public void postMessage(){
-		
+        System.out.println("请输入要发布的新闻");
+        Scanner in=new Scanner(System.in);
+        String post=in.next();
+        WritePostFile(post);
+        System.out.println("消息发布成功");
 	}
 	public void showHistoryMessage(){
-		
+		loadPostFile();
 	}
     public String getGender(){
         return gender?"男":"女";
@@ -117,7 +121,7 @@ public class Block implements implement{
     }
     public void WritePostFile(String str)
     {
-        String filename="res/Post"+buildId+".txt";
+        String filename="Post"+buildId+".txt";
         try{
             postFile=new File(filename);
             if(!postFile.exists())
@@ -140,7 +144,7 @@ public class Block implements implement{
     }
     public void WriteProblemFile(String str)
     {
-        String filename="res/Problem"+buildId+".txt";
+        String filename="Problem"+buildId+".txt";
         try{
         problemFile=new File(filename);
         if(!problemFile.exists())
@@ -165,7 +169,7 @@ public class Block implements implement{
     {
         System.out.println(getBuildId()+"号大楼公告板如下");
         try{
-            FileReader fr=new FileReader(postFile);
+            FileReader fr=new FileReader("Post"+getBuildId()+".txt");
             BufferedReader br=new BufferedReader(fr);
             String str;
             while((str=br.readLine())!=null)
